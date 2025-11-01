@@ -1,184 +1,128 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>배리어프리 키오스크 - 주식회사 모하</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>배리어프리 키오스크 - (주)휴먼아이티</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .animate-fadeInUp {
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-        .dropdown-menu {
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-10px);
-            transition: all 0.3s ease;
-        }
-        .group:hover .dropdown-menu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+    <link href="/static/style.css" rel="stylesheet"/>
 </head>
-<body class="bg-gradient-to-br from-blue-50 via-white to-purple-50">
-    <!-- Navigation -->
-    <nav class="bg-white/90 backdrop-blur-md shadow-lg sticky top-0 z-50 border-b-2 border-purple-100">
-        <div class="container mx-auto px-4">
-            <div class="flex items-center justify-between h-20">
-                <!-- Logo -->
-                <a href="/index.html" class="flex items-center space-x-3 group">
-                    <div class="w-12 h-12 bg-gradient-to-br from-purple-600 to-pink-600 rounded-xl flex items-center justify-center transform group-hover:rotate-6 transition-transform duration-300">
-                        <span class="text-white font-bold text-xl">모하</span>
-                    </div>
-                    <span class="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                        주식회사 모하
-                    </span>
-                </a>
-
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex items-center space-x-1">
-                    <a href="/index.html" class="px-4 py-2 rounded-lg hover:bg-purple-50 transition-all duration-300 font-medium text-gray-700 hover:text-purple-600">
-                        홈
+<body class="bg-gray-50">
+    <div>
+        <!-- Header -->
+        <header class="bg-white shadow-sm sticky top-0 z-50">
+            <div class="container mx-auto px-4">
+                <div class="flex items-center justify-between h-20">
+                    <a href="/" class="flex items-center space-x-3">
+                        <img src="https://page.gensparksite.com/v1/base64_upload/a083f176d0e758352a6c24af9ebea7fa" alt="휴먼아이티 로고" class="h-12"/>
                     </a>
-                    
-                    <!-- 회사소개 Dropdown -->
-                    <div class="relative group">
-                        <button class="px-4 py-2 rounded-lg hover:bg-purple-50 transition-all duration-300 font-medium text-gray-700 hover:text-purple-600 flex items-center gap-1">
-                            회사소개
-                            <i class="fas fa-chevron-down text-xs group-hover:rotate-180 transition-transform duration-300"></i>
-                        </button>
-                        <div class="dropdown-menu absolute top-full left-1/2 -translate-x-1/2 mt-2 w-56 bg-white/95 backdrop-blur-md rounded-xl shadow-2xl border border-purple-100 py-2">
-                            <a href="/about/index.html#vision" class="block px-6 py-3 hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 transition-all duration-300 text-gray-700 hover:text-purple-600 border-l-4 border-transparent hover:border-purple-500">
-                                <i class="fas fa-lightbulb mr-2"></i>비전
-                            </a>
-                            <a href="/about/index.html#organization" class="block px-6 py-3 hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 transition-all duration-300 text-gray-700 hover:text-purple-600 border-l-4 border-transparent hover:border-purple-500">
-                                <i class="fas fa-sitemap mr-2"></i>조직도
-                            </a>
-                            <a href="/about/index.html#history" class="block px-6 py-3 hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 transition-all duration-300 text-gray-700 hover:text-purple-600 border-l-4 border-transparent hover:border-purple-500">
-                                <i class="fas fa-history mr-2"></i>연혁
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- 사업영역 Link -->
-                    <a href="/business/index.html" class="px-4 py-2 rounded-lg hover:bg-purple-50 transition-all duration-300 font-medium text-gray-700 hover:text-purple-600">
-                        사업영역
-                    </a>
-
-                    <!-- 제품소개 Dropdown -->
-                    <div class="relative group">
-                        <button class="px-4 py-2 rounded-lg bg-gradient-to-r from-purple-50 to-pink-50 transition-all duration-300 font-medium text-purple-600 flex items-center gap-1 shadow-sm">
-                            제품소개
-                            <i class="fas fa-chevron-down text-xs group-hover:rotate-180 transition-transform duration-300"></i>
-                        </button>
-                        <div class="dropdown-menu absolute top-full left-1/2 -translate-x-1/2 mt-2 w-56 bg-white/95 backdrop-blur-md rounded-xl shadow-2xl border border-purple-100 py-2">
-                            <a href="/products/wooridoori.html" class="block px-6 py-3 hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 transition-all duration-300 text-gray-700 hover:text-purple-600 border-l-4 border-transparent hover:border-purple-500">
-                                <i class="fas fa-heart mr-2"></i>우리두리 돌봄인형
-                            </a>
-                            <a href="/products/kiosk.html" class="block px-6 py-3 bg-gradient-to-r from-purple-50 to-pink-50 text-purple-600 border-l-4 border-purple-500">
-                                <i class="fas fa-desktop mr-2"></i>배리어프리 키오스크
-                            </a>
-                            <a href="/products/ai-smart-hub.html" class="block px-6 py-3 hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 transition-all duration-300 text-gray-700 hover:text-purple-600 border-l-4 border-transparent hover:border-purple-500">
-                                <i class="fas fa-ear-deaf mr-2"></i>AI 스마트허브
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- 연구개발 Link -->
-                    <a href="/research/capability.html" class="px-4 py-2 rounded-lg hover:bg-purple-50 transition-all duration-300 font-medium text-gray-700 hover:text-purple-600">
-                        연구개발
-                    </a>
-
-                    <a href="/index.html#contact" class="px-4 py-2 rounded-lg hover:bg-purple-50 transition-all duration-300 font-medium text-gray-700 hover:text-purple-600">
-                        문의하기
-                    </a>
-                </div>
-
-                <!-- Mobile Menu Button -->
-                <button class="md:hidden text-gray-600 hover:text-purple-600" onclick="toggleMobileMenu()">
-                    <i class="fas fa-bars text-2xl"></i>
-                </button>
+                    <nav class="hidden md:flex items-center space-x-1">
+          <a href="/" class="px-4 py-2 text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">HOME</a>
+          
+          <!-- 회사소개 메뉴 -->
+          <div class="relative group">
+            <button class="px-4 py-2 text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 flex items-center gap-1">
+              회사소개
+              <i class="fas fa-chevron-down text-xs transition-transform duration-200 group-hover:rotate-180"></i>
+            </button>
+            <div class="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-48 bg-white shadow-xl rounded-xl py-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 border border-gray-100">
+              <a href="/about" class="flex items-center gap-3 px-5 py-2.5 text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-600 transition-all duration-200">
+                <i class="fas fa-building text-blue-500 w-4"></i>
+                <span class="font-medium">회사현황</span>
+              </a>
+              <a href="/about/history.html" class="flex items-center gap-3 px-5 py-2.5 text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-600 transition-all duration-200">
+                <i class="fas fa-history text-blue-500 w-4"></i>
+                <span class="font-medium">회사연혁</span>
+              </a>
+              <a href="/location" class="flex items-center gap-3 px-5 py-2.5 text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-600 transition-all duration-200">
+                <i class="fas fa-map-marker-alt text-blue-500 w-4"></i>
+                <span class="font-medium">오시는길</span>
+              </a>
             </div>
-
-            <!-- Mobile Menu -->
-            <div id="mobileMenu" class="hidden md:hidden pb-4">
-                <a href="/index.html" class="block px-4 py-2 hover:bg-purple-50 rounded-lg transition-colors">홈</a>
-                <a href="/about/index.html" class="block px-4 py-2 hover:bg-purple-50 rounded-lg transition-colors">회사소개</a>
-                <a href="/business/index.html" class="block px-4 py-2 hover:bg-purple-50 rounded-lg transition-colors">사업영역</a>
-                <a href="/products/wooridoori.html" class="block px-4 py-3 hover:bg-purple-50 rounded-lg transition-colors pl-8">
-                    <i class="fas fa-heart mr-2"></i>우리두리 돌봄인형
-                </a>
-                <a href="/products/kiosk.html" class="block px-4 py-3 bg-purple-50 rounded-lg text-purple-600 pl-8">
-                    <i class="fas fa-desktop mr-2"></i>배리어프리 키오스크
-                </a>
-                <a href="/research/capability.html" class="block px-4 py-2 hover:bg-purple-50 rounded-lg transition-colors">연구개발</a>
-                <a href="/index.html#contact" class="block px-4 py-2 hover:bg-purple-50 rounded-lg transition-colors">문의하기</a>
+          </div>
+          
+          <!-- 제품소개 메뉴 -->
+          <div class="relative group">
+            <button class="px-4 py-2 text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 flex items-center gap-1">
+              제품소개
+              <i class="fas fa-chevron-down text-xs transition-transform duration-200 group-hover:rotate-180"></i>
+            </button>
+            <div class="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-56 bg-white shadow-xl rounded-xl py-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 border border-gray-100">
+              <a href="/products/wooridoori.html" class="flex items-center gap-3 px-5 py-2.5 text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-600 transition-all duration-200">
+                <i class="fas fa-robot text-purple-500 w-4"></i>
+                <span class="font-medium">우리두리 돌봄인형</span>
+              </a>
+              <a href="/products/kiosk.html" class="flex items-center gap-3 px-5 py-2.5 text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-600 transition-all duration-200">
+                <i class="fas fa-desktop text-purple-500 w-4"></i>
+                <span class="font-medium">배리어프리 키오스크</span>
+              </a>
+              <a href="/products/ai-smart-hub.html" class="flex items-center gap-3 px-5 py-2.5 text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-600 transition-all duration-200">
+                <i class="fas fa-ear-deaf text-purple-500 w-4"></i>
+                <span class="font-medium">AI 스마트허브</span>
+              </a>
             </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="relative py-20 overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-br from-blue-100 via-purple-50 to-pink-100 opacity-50"></div>
-        <div class="container mx-auto px-4 relative z-10">
-            <div class="max-w-4xl mx-auto text-center animate-fadeInUp">
-                <div class="inline-block mb-6">
-                    <span class="px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full text-sm font-semibold shadow-lg">
-                        <i class="fas fa-universal-access mr-2"></i>포용적 디지털 접근성
-                    </span>
+          </div>
+          
+          <!-- 게시판 메뉴 -->
+          <div class="relative group">
+            <button class="px-4 py-2 text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 flex items-center gap-1">
+              게시판
+              <i class="fas fa-chevron-down text-xs transition-transform duration-200 group-hover:rotate-180"></i>
+            </button>
+            <div class="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-48 bg-white shadow-xl rounded-xl py-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 border border-gray-100">
+              <a href="/board/notice" class="flex items-center gap-3 px-5 py-2.5 text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-600 transition-all duration-200">
+                <i class="fas fa-bullhorn text-green-500 w-4"></i>
+                <span class="font-medium">공지사항</span>
+              </a>
+              <a href="/board/download" class="flex items-center gap-3 px-5 py-2.5 text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-600 transition-all duration-200">
+                <i class="fas fa-download text-green-500 w-4"></i>
+                <span class="font-medium">자료실</span>
+              </a>
+              <a href="/board/faq" class="flex items-center gap-3 px-5 py-2.5 text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-600 transition-all duration-200">
+                <i class="fas fa-question-circle text-green-500 w-4"></i>
+                <span class="font-medium">자주하는질문</span>
+              </a>
+              <a href="/board/inquiry" class="flex items-center gap-3 px-5 py-2.5 text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-600 transition-all duration-200">
+                <i class="fas fa-envelope text-green-500 w-4"></i>
+                <span class="font-medium">문의하기</span>
+              </a>
+            </div>
+          </div>
+          
+          <a href="/quote" class="px-4 py-2 text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">견적신청</a>
+          <a href="/contact" class="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-200 shadow-md hover:shadow-lg">Contact us</a>
+        </nav>
                 </div>
-                <h1 class="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-                    배리어프리 키오스크
-                </h1>
-                <p class="text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed">
-                    누구나 쉽게 사용할 수 있는 무장애 키오스크 솔루션
-                </p>
-                <div class="flex flex-wrap justify-center gap-4">
-                    <div class="px-6 py-3 bg-white rounded-lg shadow-md">
-                        <i class="fas fa-wheelchair text-blue-500 mr-2"></i>
-                        <span class="font-semibold text-gray-700">휠체어 사용자</span>
+            </div>
+        </header>
+
+        <!-- Page Header -->
+        <section class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16">
+            <div class="container mx-auto px-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-4xl font-bold mb-4">배리어프리 키오스크</h1>
+                        <p class="text-xl text-blue-100">Barrier-Free Kiosk - 누구나 쉽게 사용할 수 있는 무장애 키오스크 솔루션</p>
                     </div>
-                    <div class="px-6 py-3 bg-white rounded-lg shadow-md">
-                        <i class="fas fa-eye-slash text-purple-500 mr-2"></i>
-                        <span class="font-semibold text-gray-700">시각장애인</span>
-                    </div>
-                    <div class="px-6 py-3 bg-white rounded-lg shadow-md">
-                        <i class="fas fa-deaf text-pink-500 mr-2"></i>
-                        <span class="font-semibold text-gray-700">청각장애인</span>
-                    </div>
-                    <div class="px-6 py-3 bg-white rounded-lg shadow-md">
-                        <i class="fas fa-user-friends text-green-500 mr-2"></i>
-                        <span class="font-semibold text-gray-700">고령자</span>
+                    <div class="hidden md:block">
+                        <i class="fas fa-universal-access text-8xl opacity-20"></i>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Main Content -->
-    <section class="py-16">
-        <div class="container mx-auto px-4">
-            <!-- Product Introduction -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-                <!-- Product Image -->
-                <div class="bg-white rounded-xl shadow-lg p-8 flex items-center justify-center">
-                    <img src="https://cdn1.genspark.ai/user-upload-image/rmbg_generated/0_73a1dff1-397f-41e7-80a6-c1057803faa4" 
-                         alt="배리어프리 키오스크" 
-                         class="w-full h-96 object-contain drop-shadow-2xl">
-                </div>
+        <!-- Main Content -->
+        <main class="py-16">
+            <div class="container mx-auto px-4">
+                
+                <!-- 제품 소개 -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                        <img src="https://cdn1.genspark.ai/user-upload-image/rmbg_generated/0_73a1dff1-397f-41e7-80a6-c1057803faa4" 
+                             alt="배리어프리 키오스크" 
+                             class="w-full h-auto object-cover"/>
+                    </div>
 
                 <!-- Product Overview -->
                 <div class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl shadow-lg p-8">
@@ -598,65 +542,45 @@
                 </div>
             </div>
 
-            <!-- CTA Section -->
-            <div class="text-center bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-xl shadow-2xl p-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
-                    배리어프리 키오스크 도입 문의
-                </h2>
-                <p class="text-xl text-white/90 mb-8">
-                    누구나 쉽게 사용할 수 있는 무장애 키오스크로 고객 접근성을 높이세요
-                </p>
-                <a href="/index.html#contact" 
-                   class="inline-block bg-white text-purple-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1">
-                    <i class="fas fa-envelope mr-2"></i>지금 문의하기
-                </a>
             </div>
-        </div>
-    </section>
+        </main>
 
-    <!-- Footer -->
-    <footer class="bg-gradient-to-r from-purple-900 via-purple-800 to-pink-900 text-white py-12 mt-20">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-                <div>
-                    <h3 class="text-2xl font-bold mb-4 flex items-center">
-                        <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center mr-3">
-                            <span class="text-purple-600 font-bold">모하</span>
+
+
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-white py-12 mt-16">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div>
+                        <h3 class="text-xl font-bold mb-4">(주)휴먼아이티</h3>
+                        <p class="text-gray-400 mb-4">
+                            최고의 품질과 기술력으로<br/>고객의 성공을 함께합니다.
+                        </p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold mb-4">Contact Info</h4>
+                        <div class="space-y-2 text-gray-400">
+                            <p><i class="fas fa-map-marker-alt mr-2"></i> 경북 구미시 고아읍 들성로7길 5-36</p>
+                            <p><i class="fas fa-phone mr-2"></i> 054-XXX-XXXX</p>
+                            <p><i class="fas fa-envelope mr-2"></i> contact@humanit.co.kr</p>
                         </div>
-                        주식회사 모하
-                    </h3>
-                    <p class="text-purple-200">
-                        기술로 더 나은 세상을 만들어갑니다
-                    </p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold mb-4">Quick Links</h4>
+                        <div class="space-y-2">
+                            <a href="/about" class="block text-gray-400 hover:text-white transition">회사소개</a>
+                            <a href="/products/wooridoori.html" class="block text-gray-400 hover:text-white transition">우리두리 돌봄인형</a>
+                            <a href="/products/kiosk.html" class="block text-gray-400 hover:text-white transition">배리어프리 키오스크</a>
+                            <a href="/products/ai-smart-hub.html" class="block text-gray-400 hover:text-white transition">AI 스마트허브</a>
+                            <a href="/contact" class="block text-gray-400 hover:text-white transition">문의하기</a>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <h4 class="text-lg font-bold mb-4">빠른 링크</h4>
-                    <ul class="space-y-2">
-                        <li><a href="/about/index.html" class="text-purple-200 hover:text-white transition-colors">회사소개</a></li>
-                        <li><a href="/business/index.html" class="text-purple-200 hover:text-white transition-colors">사업영역</a></li>
-                        <li><a href="/products/wooridoori.html" class="text-purple-200 hover:text-white transition-colors">우리두리 돌봄인형</a></li>
-                        <li><a href="/products/kiosk.html" class="text-purple-200 hover:text-white transition-colors">배리어프리 키오스크</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-lg font-bold mb-4">문의하기</h4>
-                    <ul class="space-y-2 text-purple-200">
-                        <li><i class="fas fa-envelope mr-2"></i>contact@moha.co.kr</li>
-                        <li><i class="fas fa-phone mr-2"></i>02-1234-5678</li>
-                    </ul>
+                <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                    <p>© 2024 (주)휴먼아이티. All rights reserved.</p>
                 </div>
             </div>
-            <div class="border-t border-purple-700 pt-8 text-center text-purple-200">
-                <p>&copy; 2024 주식회사 모하. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        function toggleMobileMenu() {
-            const mobileMenu = document.getElementById('mobileMenu');
-            mobileMenu.classList.toggle('hidden');
-        }
-    </script>
+        </footer>
+    </div>
 </body>
 </html>
