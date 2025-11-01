@@ -1,0 +1,8 @@
+# Admin pages - serve directly without SPA fallback
+/admin/* 200
+
+# Functions API endpoints
+/api/* 200
+
+# All other routes fall back to index.html (SPA mode)
+/* /index.html 200
