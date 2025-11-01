@@ -1,8 +1,18 @@
-# Admin pages - serve directly without SPA fallback
-/admin/* 200
+# Admin pages - serve directly (do not redirect)
+/admin/download.html /admin/download.html 200
+/admin/faq.html /admin/faq.html 200
+/admin/gallery.html /admin/gallery.html 200
+/admin/notice.html /admin/notice.html 200
+/admin/dashboard.html /admin/dashboard.html 200
+/admin/index.html /admin/index.html 200
 
 # Functions API endpoints
 /api/* 200
 
-# All other routes fall back to index.html (SPA mode)
+# Main pages - serve directly
+/about.html /about.html 200
+/services.html /services.html 200
+/contact.html /contact.html 200
+
+# SPA fallback for non-existent pages only
 /* /index.html 200
