@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>자주하는질문 - (주)휴먼아이티</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+    <link href="/static/style.css" rel="stylesheet"/>
+    <style>
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+        }
+        .faq-answer.active {
+            max-height: 1000px;
+            transition: max-height 0.5s ease-in, padding 0.3s ease-in;
+        }
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+        .faq-icon.active {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div>
+        <!-- Header -->
+        <header class="bg-white shadow-sm sticky top-0 z-50">
+            <div class="container mx-auto px-4">
+                <div class="flex items-center justify-between h-20">
+                    <a href="/" class="flex items-center space-x-3">
+                        <img src="https://page.gensparksite.com/v1/base64_upload/a083f176d0e758352a6c24af9ebea7fa" alt="휴먼아이티 로고" class="h-12"/>
+                    </a>
+                    <nav class="hidden md:flex items-center space-x-1">
+          <a href="/" class="px-4 py-2 text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">HOME</a>
+          
+          <!-- 회사소개 메뉴 -->
+          <div class="relative group">
+            <button class="px-4 py-2 text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 flex items-center gap-1">
+              회사소개
+              <i class="fas fa-chevron-down text-xs transition-transform duration-200 group-hover:rotate-180"></i>
+            </button>
+            <div class="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-48 bg-white shadow-xl rounded-xl py-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 border border-gray-100">
+              <a href="/about" class="flex items-center gap-3 px-5 py-2.5 text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-600 transition-all duration-200">
+                <i class="fas fa-building text-blue-500 w-4"></i>
+                <span class="font-medium">회사현황</span>
+              </a>
+              <a href="/about/history.html" class="flex items-center gap-3 px-5 py-2.5 text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-600 transition-all duration-200">
+                <i class="fas fa-history text-blue-500 w-4"></i>
+                <span class="font-medium">회사연혁</span>
+              </a>
+              <a href="/location" class="flex items-center gap-3 px-5 py-2.5 text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-600 transition-all duration-200">
+                <i class="fas fa-map-marker-alt text-blue-500 w-4"></i>
+                <span class="font-medium">오시는길</span>
+              </a>
+            </div>
+          </div>
+          
+          <!-- 제품소개 메뉴 -->
+          <div class="relative group">
+            <button class="px-4 py-2 text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 flex items-center gap-1">
+              제품소개
+              <i class="fas fa-chevron-down text-xs transition-transform duration-200 group-hover:rotate-180"></i>
+            </button>
+            <div class="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-56 bg-white shadow-xl rounded-xl py-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 border border-gray-100">
+              <a href="/products/wooridoori.html" class="flex items-center gap-3 px-5 py-2.5 text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-600 transition-all duration-200">
+                <i class="fas fa-robot text-purple-500 w-4"></i>
+                <span class="font-medium">우리두리 돌봄인형</span>
+              </a>
+              <a href="/products/kiosk.html" class="flex items-center gap-3 px-5 py-2.5 text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-600 transition-all duration-200">
+                <i class="fas fa-desktop text-purple-500 w-4"></i>
+                <span class="font-medium">배리어프리 키오스크</span>
+              </a>
+              <a href="/products/ai-smart-hub.html" class="flex items-center gap-3 px-5 py-2.5 text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-600 transition-all duration-200">
+                <i class="fas fa-ear-deaf text-purple-500 w-4"></i>
+                <span class="font-medium">AI 스마트허브</span>
+              </a>
+            </div>
+          </div>
+          
+          <!-- 고객지원 메뉴 -->
+          <div class="relative group">
+            <button class="px-4 py-2 text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 flex items-center gap-1">
+              고객지원
+              <i class="fas fa-chevron-down text-xs transition-transform duration-200 group-hover:rotate-180"></i>
+            </button>
+            <div class="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-48 bg-white shadow-xl rounded-xl py-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 border border-gray-100">
+              <a href="/board/notice" class="flex items-center gap-3 px-5 py-2.5 text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-600 transition-all duration-200">
+                <i class="fas fa-bullhorn text-green-500 w-4"></i>
+                <span class="font-medium">공지사항</span>
+              </a>
+              <a href="/board/download" class="flex items-center gap-3 px-5 py-2.5 text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-600 transition-all duration-200">
+                <i class="fas fa-download text-green-500 w-4"></i>
+                <span class="font-medium">자료실</span>
+              </a>
+              <a href="/board/faq" class="flex items-center gap-3 px-5 py-2.5 text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-600 transition-all duration-200">
+                <i class="fas fa-question-circle text-green-500 w-4"></i>
+                <span class="font-medium">자주하는질문</span>
+              </a>
+              <a href="/board/inquiry" class="flex items-center gap-3 px-5 py-2.5 text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-600 transition-all duration-200">
+                <i class="fas fa-envelope text-green-500 w-4"></i>
+                <span class="font-medium">문의하기</span>
+              </a>
+            </div>
+          </div>
+          
+          <a href="/quote" class="px-4 py-2 text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">견적신청</a>
+          <a href="/contact" class="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-200 shadow-md hover:shadow-lg">Contact us</a>
+        </nav>
+                </div>
+            </div>
+        </header>
+
+        <!-- Page Header -->
+        <section class="bg-gradient-to-r from-green-600 to-teal-600 text-white py-16">
+            <div class="container mx-auto px-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-4xl font-bold mb-4">자주하는질문</h1>
+                        <p class="text-xl text-green-100">FAQ - 고객님들께서 자주 문의하시는 내용을 확인하실 수 있습니다</p>
+                    </div>
+                    <div class="hidden md:block">
+                        <i class="fas fa-question-circle text-8xl opacity-20"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content -->
+        <main class="py-16">
+            <div class="container mx-auto px-4">
+                <!-- 카테고리 필터 -->
+                <div class="mb-8 bg-white rounded-xl shadow-lg p-6">
+                    <div class="flex items-center gap-2 mb-4">
+                        <i class="fas fa-filter text-blue-600"></i>
+                        <h2 class="text-lg font-bold text-gray-800">카테고리</h2>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="filterFAQ('all')" class="category-btn px-4 py-2 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors active" data-category="all">
+                            <i class="fas fa-th mr-2"></i>전체
+                        </button>
+                        <button onclick="filterFAQ('product')" class="category-btn px-4 py-2 rounded-lg bg-gray-200 text-gray-700 font-medium hover:bg-gray-300 transition-colors" data-category="product">
+                            <i class="fas fa-box mr-2"></i>제품문의
+                        </button>
+                        <button onclick="filterFAQ('purchase')" class="category-btn px-4 py-2 rounded-lg bg-gray-200 text-gray-700 font-medium hover:bg-gray-300 transition-colors" data-category="purchase">
+                            <i class="fas fa-shopping-cart mr-2"></i>구매/결제
+                        </button>
+                        <button onclick="filterFAQ('technical')" class="category-btn px-4 py-2 rounded-lg bg-gray-200 text-gray-700 font-medium hover:bg-gray-300 transition-colors" data-category="technical">
+                            <i class="fas fa-wrench mr-2"></i>기술지원
+                        </button>
+                        <button onclick="filterFAQ('service')" class="category-btn px-4 py-2 rounded-lg bg-gray-200 text-gray-700 font-medium hover:bg-gray-300 transition-colors" data-category="service">
+                            <i class="fas fa-headset mr-2"></i>서비스/배송
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 검색 영역 -->
+                <div class="mb-8 bg-white rounded-xl shadow-lg p-6">
+                    <div class="max-w-2xl mx-auto">
+                        <div class="relative">
+                            <input type="text" id="searchInput" placeholder="궁금하신 내용을 검색해보세요" class="w-full px-6 py-4 pr-32 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" onkeyup="searchFAQ()"/>
+                            <button class="absolute right-2 top-1/2 -translate-y-1/2 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                                <i class="fas fa-search mr-2"></i>검색
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 목록 -->
+                <div class="space-y-3">
+                    <!-- 제품문의 -->
+                    <div class="faq-item bg-white rounded-xl shadow-lg overflow-hidden border-l-4 border-purple-500" data-category="product">
+                        <button onclick="toggleFAQ(this)" class="w-full px-6 py-5 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                            <div class="flex items-start gap-4 text-left">
+                                <span class="flex-shrink-0 w-8 h-8 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center font-bold">Q</span>
+                                <div>
+                                    <div class="flex items-center gap-2 mb-1">
+                                        <span class="px-2 py-1 bg-purple-100 text-purple-700 text-xs font-medium rounded">제품문의</span>
+                                    </div>
+                                    <h3 class="text-lg font-medium text-gray-900">우리두리 돌봄인형은 어떤 기능이 있나요?</h3>
+                                </div>
+                            </div>
+                            <i class="fas fa-chevron-down text-gray-400 text-xl faq-icon"></i>
+                        </button>
+                        <div class="faq-answer px-6 bg-gray-50">
+                            <div class="py-5 pl-12 border-t border-gray-200">
+                                <div class="flex items-start gap-4">
+                                    <span class="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold">A</span>
+                                    <div class="text-gray-700 space-y-3">
+                                        <p>우리두리 돌봄인형은 다음과 같은 주요 기능을 제공합니다:</p>
+                                        <ul class="list-disc list-inside space-y-2 ml-4">
+                                            <li><strong>대화 기능:</strong> AI 기반 자연어 처리로 자연스러운 대화 가능</li>
+                                            <li><strong>건강 모니터링:</strong> 활동량, 수면 패턴, 복약 알림 등 건강 관리</li>
+                                            <li><strong>응급 상황 대응:</strong> 낙상 감지 및 응급 호출 기능</li>
+                                            <li><strong>정서 지원:</strong> 감정 인식 및 맞춤형 콘텐츠 제공</li>
+                                            <li><strong>원격 모니터링:</strong> 보호자 앱을 통한 실시간 상태 확인</li>
+                                        </ul>
+                                        <div class="mt-4 p-4 bg-blue-50 rounded-lg">
+                                            <p class="text-sm"><i class="fas fa-info-circle text-blue-600 mr-2"></i>자세한 제품 정보는 <a href="/products/wooridoori.html" class="text-blue-600 font-medium hover:underline">제품 페이지</a>를 참고해주세요.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item bg-white rounded-xl shadow-lg overflow-hidden border-l-4 border-purple-500" data-category="product">
+                        <button onclick="toggleFAQ(this)" class="w-full px-6 py-5 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                            <div class="flex items-start gap-4 text-left">
+                                <span class="flex-shrink-0 w-8 h-8 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center font-bold">Q</span>
+                                <div>
+                                    <div class="flex items-center gap-2 mb-1">
+                                        <span class="px-2 py-1 bg-purple-100 text-purple-700 text-xs font-medium rounded">제품문의</span>
+                                    </div>
+                                    <h3 class="text-lg font-medium text-gray-900">배리어프리 키오스크는 어떤 접근성 기능을 지원하나요?</h3>
+                                </div>
+                            </div>
+                            <i class="fas fa-chevron-down text-gray-400 text-xl faq-icon"></i>
+                        </button>
+                        <div class="faq-answer px-6 bg-gray-50">
+                            <div class="py-5 pl-12 border-t border-gray-200">
+                                <div class="flex items-start gap-4">
+                                    <span class="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold">A</span>
+                                    <div class="text-gray-700 space-y-3">
+                                        <p>배리어프리 키오스크는 모든 사용자를 위한 다양한 접근성 기능을 제공합니다:</p>
+                                        <ul class="list-disc list-inside space-y-2 ml-4">
+                                            <li><strong>시각장애인 지원:</strong> 음성 안내, 화면 낭독, 점자 키패드</li>
+                                            <li><strong>청각장애인 지원:</strong> 수화 영상, 자막 표시, 진동 피드백</li>
+                                            <li><strong>지체장애인 지원:</strong> 높낮이 조절, 휠체어 접근 가능 설계</li>
+                                            <li><strong>고령자 지원:</strong> 큰 글씨, 단순한 UI, 느린 속도 옵션</li>
+                                            <li><strong>다국어 지원:</strong> 한국어, 영어, 중국어, 일본어 등</li>
+                                        </ul>
+                                        <div class="mt-4 p-4 bg-green-50 rounded-lg">
+                                            <p class="text-sm"><i class="fas fa-award text-green-600 mr-2"></i>웹 접근성 품질인증(KWCAG) 및 한국지능정보사회진흥원(NIA) 인증 획득</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item bg-white rounded-xl shadow-lg overflow-hidden border-l-4 border-purple-500" data-category="product">
+                        <button onclick="toggleFAQ(this)" class="w-full px-6 py-5 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                            <div class="flex items-start gap-4 text-left">
+                                <span class="flex-shrink-0 w-8 h-8 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center font-bold">Q</span>
+                                <div>
+                                    <div class="flex items-center gap-2 mb-1">
+                                        <span class="px-2 py-1 bg-purple-100 text-purple-700 text-xs font-medium rounded">제품문의</span>
+                                    </div>
+                                    <h3 class="text-lg font-medium text-gray-900">AI 스마트허브의 주요 특징은 무엇인가요?</h3>
+                                </div>
+                            </div>
+                            <i class="fas fa-chevron-down text-gray-400 text-xl faq-icon"></i>
+                        </button>
+                        <div class="faq-answer px-6 bg-gray-50">
+                            <div class="py-5 pl-12 border-t border-gray-200">
+                                <div class="flex items-start gap-4">
+                                    <span class="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold">A</span>
+                                    <div class="text-gray-700 space-y-3">
+                                        <p>AI 스마트허브는 청각장애인을 위한 첨단 보조기기로 다음과 같은 특징이 있습니다:</p>
+                                        <ul class="list-disc list-inside space-y-2 ml-4">
+                                            <li><strong>실시간 음성-문자 변환:</strong> AI 기반 고정밀 음성 인식</li>
+                                            <li><strong>스마트 알림:</strong> 초인종, 화재경보, 아기 울음 등 생활 소리 감지</li>
+                                            <li><strong>영상통화 지원:</strong> 수화 통역 및 자막 제공</li>
+                                            <li><strong>IoT 연동:</strong> 스마트홈 기기 제어 및 모니터링</li>
+                                            <li><strong>휴대 가능:</strong> 경량 디자인으로 외출 시에도 사용 가능</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 구매/결제 -->
+                    <div class="faq-item bg-white rounded-xl shadow-lg overflow-hidden border-l-4 border-blue-500" data-category="purchase">
+                        <button onclick="toggleFAQ(this)" class="w-full px-6 py-5 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                            <div class="flex items-start gap-4 text-left">
+                                <span class="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold">Q</span>
+                                <div>
+                                    <div class="flex items-center gap-2 mb-1">
+                                        <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded">구매/결제</span>
+                                    </div>
+                                    <h3 class="text-lg font-medium text-gray-900">제품 구매는 어떻게 진행하나요?</h3>
+                                </div>
+                            </div>
+                            <i class="fas fa-chevron-down text-gray-400 text-xl faq-icon"></i>
+                        </button>
+                        <div class="faq-answer px-6 bg-gray-50">
+                            <div class="py-5 pl-12 border-t border-gray-200">
+                                <div class="flex items-start gap-4">
+                                    <span class="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold">A</span>
+                                    <div class="text-gray-700 space-y-3">
+                                        <p>제품 구매는 다음과 같은 절차로 진행됩니다:</p>
+                                        <ol class="list-decimal list-inside space-y-2 ml-4">
+                                            <li><strong>견적 문의:</strong> <a href="/quote" class="text-blue-600 hover:underline">견적신청 페이지</a>에서 필요한 제품 및 수량 입력</li>
+                                            <li><strong>상담 진행:</strong> 담당자가 1영업일 내 연락하여 상세 상담</li>
+                                            <li><strong>견적서 발송:</strong> 맞춤형 견적서 제공</li>
+                                            <li><strong>계약 체결:</strong> 견적 승인 후 정식 계약 진행</li>
+                                            <li><strong>납품 및 설치:</strong> 일정에 맞춰 제품 납품 및 설치</li>
+                                            <li><strong>교육 및 AS:</strong> 사용자 교육 및 사후 지원</li>
+                                        </ol>
+                                        <div class="mt-4 p-4 bg-blue-50 rounded-lg">
+                                            <p class="text-sm"><i class="fas fa-phone text-blue-600 mr-2"></i>문의: 054-XXX-XXXX | <a href="mailto:contact@humanit.co.kr" class="text-blue-600 hover:underline">contact@humanit.co.kr</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item bg-white rounded-xl shadow-lg overflow-hidden border-l-4 border-blue-500" data-category="purchase">
+                        <button onclick="toggleFAQ(this)" class="w-full px-6 py-5 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                            <div class="flex items-start gap-4 text-left">
+                                <span class="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold">Q</span>
+                                <div>
+                                    <div class="flex items-center gap-2 mb-1">
+                                        <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded">구매/결제</span>
+                                    </div>
+                                    <h3 class="text-lg font-medium text-gray-900">정부 지원사업을 통한 구매가 가능한가요?</h3>
+                                </div>
+                            </div>
+                            <i class="fas fa-chevron-down text-gray-400 text-xl faq-icon"></i>
+                        </button>
+                        <div class="faq-answer px-6 bg-gray-50">
+                            <div class="py-5 pl-12 border-t border-gray-200">
+                                <div class="flex items-start gap-4">
+                                    <span class="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold">A</span>
+                                    <div class="text-gray-700 space-y-3">
+                                        <p>네, 다양한 정부 지원사업을 통해 제품을 구매하실 수 있습니다:</p>
+                                        <ul class="list-disc list-inside space-y-2 ml-4">
+                                            <li><strong>장애인 보조기기 지원:</strong> 보건복지부 장애인 보조기기 교부사업</li>
+                                            <li><strong>노인 돌봄 서비스:</strong> 노인장기요양보험 복지용구 지원</li>
+                                            <li><strong>지자체 복지사업:</strong> 각 지역별 복지사업 예산 활용</li>
+                                            <li><strong>공공기관 사업:</strong> 공공시설 접근성 개선사업</li>
+                                        </ul>
+                                        <div class="mt-4 p-4 bg-yellow-50 rounded-lg">
+                                            <p class="text-sm"><i class="fas fa-lightbulb text-yellow-600 mr-2"></i>지원사업 자격 요건 및 신청 절차는 담당자 상담을 통해 자세히 안내해드립니다.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item bg-white rounded-xl shadow-lg overflow-hidden border-l-4 border-blue-500" data-category="purchase">
+                        <button onclick="toggleFAQ(this)" class="w-full px-6 py-5 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                            <div class="flex items-start gap-4 text-left">
+                                <span class="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold">Q</span>
+                                <div>
+                                    <div class="flex items-center gap-2 mb-1">
+                                        <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded">구매/결제</span>
+                                    </div>
+                                    <h3 class="text-lg font-medium text-gray-900">제품 가격은 어떻게 되나요?</h3>
+                                </div>
+                            </div>
+                            <i class="fas fa-chevron-down text-gray-400 text-xl faq-icon"></i>
+                        </button>
+                        <div class="faq-answer px-6 bg-gray-50">
+                            <div class="py-5 pl-12 border-t border-gray-200">
+                                <div class="flex items-start gap-4">
+                                    <span class="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold">A</span>
+                                    <div class="text-gray-700 space-y-3">
+                                        <p>제품 가격은 구매 수량, 커스터마이징 옵션, 설치 환경 등에 따라 달라질 수 있습니다:</p>
+                                        <ul class="list-disc list-inside space-y-2 ml-4">
+                                            <li><strong>우리두리 돌봄인형:</strong> 개별 구매 시 약 50~80만원 (수량 할인 가능)</li>
+                                            <li><strong>배리어프리 키오스크:</strong> 견적 문의 필요 (설치 환경에 따라 상이)</li>
+                                            <li><strong>AI 스마트허브:</strong> 개별 구매 시 약 30~50만원 (정부 지원 시 본인 부담금 감소)</li>
+                                        </ul>
+                                        <div class="mt-4 p-4 bg-blue-50 rounded-lg">
+                                            <p class="text-sm"><i class="fas fa-calculator text-blue-600 mr-2"></i>정확한 견적은 <a href="/quote" class="text-blue-600 font-medium hover:underline">견적신청</a>을 통해 확인하실 수 있습니다.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 기술지원 -->
+                    <div class="faq-item bg-white rounded-xl shadow-lg overflow-hidden border-l-4 border-orange-500" data-category="technical">
+                        <button onclick="toggleFAQ(this)" class="w-full px-6 py-5 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                            <div class="flex items-start gap-4 text-left">
+                                <span class="flex-shrink-0 w-8 h-8 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center font-bold">Q</span>
+                                <div>
+                                    <div class="flex items-center gap-2 mb-1">
+                                        <span class="px-2 py-1 bg-orange-100 text-orange-700 text-xs font-medium rounded">기술지원</span>
+                                    </div>
+                                    <h3 class="text-lg font-medium text-gray-900">제품 설치는 어떻게 진행되나요?</h3>
+                                </div>
+                            </div>
+                            <i class="fas fa-chevron-down text-gray-400 text-xl faq-icon"></i>
+                        </button>
+                        <div class="faq-answer px-6 bg-gray-50">
+                            <div class="py-5 pl-12 border-t border-gray-200">
+                                <div class="flex items-start gap-4">
+                                    <span class="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold">A</span>
+                                    <div class="text-gray-700 space-y-3">
+                                        <p>제품 설치는 당사 전문 기술진이 직접 방문하여 진행합니다:</p>
+                                        <ul class="list-disc list-inside space-y-2 ml-4">
+                                            <li><strong>사전 현장 조사:</strong> 설치 환경 확인 및 최적 설치 위치 선정</li>
+                                            <li><strong>전문 설치:</strong> 숙련된 기술진이 설치 및 초기 설정</li>
+                                            <li><strong>네트워크 연결:</strong> Wi-Fi, 유선 인터넷 등 네트워크 설정</li>
+                                            <li><strong>기능 테스트:</strong> 모든 기능 정상 작동 확인</li>
+                                            <li><strong>사용자 교육:</strong> 사용 방법 및 주의사항 안내</li>
+                                        </ul>
+                                        <div class="mt-4 p-4 bg-green-50 rounded-lg">
+                                            <p class="text-sm"><i class="fas fa-check-circle text-green-600 mr-2"></i>설치 후 1개월간 무상 기술 지원을 제공합니다.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item bg-white rounded-xl shadow-lg overflow-hidden border-l-4 border-orange-500" data-category="technical">
+                        <button onclick="toggleFAQ(this)" class="w-full px-6 py-5 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                            <div class="flex items-start gap-4 text-left">
+                                <span class="flex-shrink-0 w-8 h-8 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center font-bold">Q</span>
+                                <div>
+                                    <div class="flex items-center gap-2 mb-1">
+                                        <span class="px-2 py-1 bg-orange-100 text-orange-700 text-xs font-medium rounded">기술지원</span>
+                                    </div>
+                                    <h3 class="text-lg font-medium text-gray-900">제품에 문제가 생겼을 때는 어떻게 해야 하나요?</h3>
+                                </div>
+                            </div>
+                            <i class="fas fa-chevron-down text-gray-400 text-xl faq-icon"></i>
+                        </button>
+                        <div class="faq-answer px-6 bg-gray-50">
+                            <div class="py-5 pl-12 border-t border-gray-200">
+                                <div class="flex items-start gap-4">
+                                    <span class="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold">A</span>
+                                    <div class="text-gray-700 space-y-3">
+                                        <p>제품 문제 발생 시 다음과 같은 지원을 받으실 수 있습니다:</p>
+                                        <ol class="list-decimal list-inside space-y-2 ml-4">
+                                            <li><strong>고객센터 문의:</strong> 전화(054-XXX-XXXX) 또는 이메일로 문의</li>
+                                            <li><strong>원격 지원:</strong> 간단한 문제는 원격으로 즉시 해결</li>
+                                            <li><strong>방문 서비스:</strong> 필요 시 기술진이 직접 방문하여 점검</li>
+                                            <li><strong>무상 AS:</strong> 보증기간 내 무상 수리 및 부품 교체</li>
+                                            <li><strong>대체품 제공:</strong> 수리 기간 중 필요 시 대체품 제공</li>
+                                        </ol>
+                                        <div class="mt-4 p-4 bg-blue-50 rounded-lg">
+                                            <p class="text-sm"><i class="fas fa-clock text-blue-600 mr-2"></i>고객센터 운영시간: 평일 09:00 ~ 18:00 (점심시간 12:00~13:00)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item bg-white rounded-xl shadow-lg overflow-hidden border-l-4 border-orange-500" data-category="technical">
+                        <button onclick="toggleFAQ(this)" class="w-full px-6 py-5 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                            <div class="flex items-start gap-4 text-left">
+                                <span class="flex-shrink-0 w-8 h-8 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center font-bold">Q</span>
+                                <div>
+                                    <div class="flex items-center gap-2 mb-1">
+                                        <span class="px-2 py-1 bg-orange-100 text-orange-700 text-xs font-medium rounded">기술지원</span>
+                                    </div>
+                                    <h3 class="text-lg font-medium text-gray-900">제품 업데이트는 어떻게 이루어지나요?</h3>
+                                </div>
+                            </div>
+                            <i class="fas fa-chevron-down text-gray-400 text-xl faq-icon"></i>
+                        </button>
+                        <div class="faq-answer px-6 bg-gray-50">
+                            <div class="py-5 pl-12 border-t border-gray-200">
+                                <div class="flex items-start gap-4">
+                                    <span class="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold">A</span>
+                                    <div class="text-gray-700 space-y-3">
+                                        <p>제품 소프트웨어는 정기적으로 업데이트되어 성능이 개선됩니다:</p>
+                                        <ul class="list-disc list-inside space-y-2 ml-4">
+                                            <li><strong>자동 업데이트:</strong> 인터넷 연결 시 자동으로 최신 버전 업데이트</li>
+                                            <li><strong>업데이트 알림:</strong> 중요 업데이트 시 사전 안내</li>
+                                            <li><strong>업데이트 내용:</strong> 신규 기능 추가, 버그 수정, 보안 강화 등</li>
+                                            <li><strong>호환성 보장:</strong> 기존 설정 및 데이터 유지</li>
+                                            <li><strong>롤백 가능:</strong> 문제 발생 시 이전 버전으로 복구 가능</li>
+                                        </ul>
+                                        <div class="mt-4 p-4 bg-yellow-50 rounded-lg">
+                                            <p class="text-sm"><i class="fas fa-exclamation-triangle text-yellow-600 mr-2"></i>업데이트 중에는 제품 사용이 일시적으로 제한될 수 있습니다. (약 5~10분 소요)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 서비스/배송 -->
+                    <div class="faq-item bg-white rounded-xl shadow-lg overflow-hidden border-l-4 border-green-500" data-category="service">
+                        <button onclick="toggleFAQ(this)" class="w-full px-6 py-5 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                            <div class="flex items-start gap-4 text-left">
+                                <span class="flex-shrink-0 w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold">Q</span>
+                                <div>
+                                    <div class="flex items-center gap-2 mb-1">
+                                        <span class="px-2 py-1 bg-green-100 text-green-700 text-xs font-medium rounded">서비스/배송</span>
+                                    </div>
+                                    <h3 class="text-lg font-medium text-gray-900">배송은 얼마나 걸리나요?</h3>
+                                </div>
+                            </div>
+                            <i class="fas fa-chevron-down text-gray-400 text-xl faq-icon"></i>
+                        </button>
+                        <div class="faq-answer px-6 bg-gray-50">
+                            <div class="py-5 pl-12 border-t border-gray-200">
+                                <div class="flex items-start gap-4">
+                                    <span class="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold">A</span>
+                                    <div class="text-gray-700 space-y-3">
+                                        <p>제품 배송 기간은 제품 종류와 수량에 따라 다릅니다:</p>
+                                        <ul class="list-disc list-inside space-y-2 ml-4">
+                                            <li><strong>우리두리 돌봄인형:</strong> 주문 후 3~5영업일 (재고 보유 시)</li>
+                                            <li><strong>배리어프리 키오스크:</strong> 주문 후 2~4주 (현장 설치 포함)</li>
+                                            <li><strong>AI 스마트허브:</strong> 주문 후 3~5영업일 (재고 보유 시)</li>
+                                        </ul>
+                                        <div class="mt-4 p-4 bg-blue-50 rounded-lg">
+                                            <p class="text-sm"><i class="fas fa-shipping-fast text-blue-600 mr-2"></i>대량 주문이나 커스터마이징 제품의 경우 별도 협의가 필요합니다.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item bg-white rounded-xl shadow-lg overflow-hidden border-l-4 border-green-500" data-category="service">
+                        <button onclick="toggleFAQ(this)" class="w-full px-6 py-5 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                            <div class="flex items-start gap-4 text-left">
+                                <span class="flex-shrink-0 w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold">Q</span>
+                                <div>
+                                    <div class="flex items-center gap-2 mb-1">
+                                        <span class="px-2 py-1 bg-green-100 text-green-700 text-xs font-medium rounded">서비스/배송</span>
+                                    </div>
+                                    <h3 class="text-lg font-medium text-gray-900">A/S 기간은 얼마나 되나요?</h3>
+                                </div>
+                            </div>
+                            <i class="fas fa-chevron-down text-gray-400 text-xl faq-icon"></i>
+                        </button>
+                        <div class="faq-answer px-6 bg-gray-50">
+                            <div class="py-5 pl-12 border-t border-gray-200">
+                                <div class="flex items-start gap-4">
+                                    <span class="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold">A</span>
+                                    <div class="text-gray-700 space-y-3">
+                                        <p>제품별 A/S 기간은 다음과 같습니다:</p>
+                                        <ul class="list-disc list-inside space-y-2 ml-4">
+                                            <li><strong>무상 A/S:</strong> 제품 인도일로부터 1년</li>
+                                            <li><strong>유상 A/S:</strong> 무상 A/S 기간 종료 후 계속 제공</li>
+                                            <li><strong>소프트웨어 업데이트:</strong> 제품 단종까지 무상 제공</li>
+                                            <li><strong>소모품 교체:</strong> 보증 범위에서 제외 (유상)</li>
+                                        </ul>
+                                        <div class="mt-4 p-4 bg-yellow-50 rounded-lg">
+                                            <p class="text-sm"><i class="fas fa-info-circle text-yellow-600 mr-2"></i>사용자 과실로 인한 고장은 보증 기간 내에도 유상 처리될 수 있습니다.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item bg-white rounded-xl shadow-lg overflow-hidden border-l-4 border-green-500" data-category="service">
+                        <button onclick="toggleFAQ(this)" class="w-full px-6 py-5 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                            <div class="flex items-start gap-4 text-left">
+                                <span class="flex-shrink-0 w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold">Q</span>
+                                <div>
+                                    <div class="flex items-center gap-2 mb-1">
+                                        <span class="px-2 py-1 bg-green-100 text-green-700 text-xs font-medium rounded">서비스/배송</span>
+                                    </div>
+                                    <h3 class="text-lg font-medium text-gray-900">제품 교육은 별도로 제공되나요?</h3>
+                                </div>
+                            </div>
+                            <i class="fas fa-chevron-down text-gray-400 text-xl faq-icon"></i>
+                        </button>
+                        <div class="faq-answer px-6 bg-gray-50">
+                            <div class="py-5 pl-12 border-t border-gray-200">
+                                <div class="flex items-start gap-4">
+                                    <span class="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold">A</span>
+                                    <div class="text-gray-700 space-y-3">
+                                        <p>네, 제품 설치 시 기본 교육이 제공되며, 추가 교육도 가능합니다:</p>
+                                        <ul class="list-disc list-inside space-y-2 ml-4">
+                                            <li><strong>설치 시 교육:</strong> 기본 사용법 및 주요 기능 안내 (1~2시간)</li>
+                                            <li><strong>온라인 교육:</strong> 동영상 매뉴얼 및 원격 교육 제공</li>
+                                            <li><strong>현장 교육:</strong> 대량 구매 시 현장 방문 교육 (별도 협의)</li>
+                                            <li><strong>교육 자료:</strong> 사용 설명서, 매뉴얼, FAQ 문서 제공</li>
+                                        </ul>
+                                        <div class="mt-4 p-4 bg-green-50 rounded-lg">
+                                            <p class="text-sm"><i class="fas fa-graduation-cap text-green-600 mr-2"></i>자료실에서 <a href="/board/download" class="text-green-600 font-medium hover:underline">매뉴얼 및 교육 자료</a>를 다운로드하실 수 있습니다.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 추가 문의 섹션 -->
+                <div class="mt-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl shadow-lg p-8 text-white text-center">
+                    <i class="fas fa-headset text-5xl mb-4 opacity-80"></i>
+                    <h2 class="text-2xl font-bold mb-4">찾으시는 답변이 없으신가요?</h2>
+                    <p class="text-blue-100 mb-6">전문 상담원이 친절하게 답변해드립니다.</p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="/board/inquiry" class="px-8 py-3 bg-white text-blue-600 font-bold rounded-lg hover:bg-gray-100 transition-colors inline-flex items-center justify-center">
+                            <i class="fas fa-envelope mr-2"></i>1:1 문의하기
+                        </a>
+                        <a href="tel:054-XXX-XXXX" class="px-8 py-3 bg-blue-700 text-white font-bold rounded-lg hover:bg-blue-800 transition-colors inline-flex items-center justify-center">
+                            <i class="fas fa-phone mr-2"></i>전화 상담
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-white py-12 mt-16">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div>
+                        <h3 class="text-xl font-bold mb-4">(주)휴먼아이티</h3>
+                        <p class="text-gray-400 mb-4">
+                            최고의 품질과 기술력으로<br/>고객의 성공을 함께합니다.
+                        </p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold mb-4">Contact Info</h4>
+                        <div class="space-y-2 text-gray-400">
+                            <p><i class="fas fa-map-marker-alt mr-2"></i> 경북 구미시 고아읍 들성로7길 5-36</p>
+                            <p><i class="fas fa-phone mr-2"></i> 054-XXX-XXXX</p>
+                            <p><i class="fas fa-envelope mr-2"></i> contact@humanit.co.kr</p>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-bold mb-4">Quick Links</h4>
+                        <div class="space-y-2">
+                            <a href="/about" class="block text-gray-400 hover:text-white transition">회사소개</a>
+                            <a href="/products/wooridoori.html" class="block text-gray-400 hover:text-white transition">우리두리 돌봄인형</a>
+                            <a href="/products/kiosk.html" class="block text-gray-400 hover:text-white transition">배리어프리 키오스크</a>
+                            <a href="/products/ai-smart-hub.html" class="block text-gray-400 hover:text-white transition">AI 스마트허브</a>
+                            <a href="/contact" class="block text-gray-400 hover:text-white transition">문의하기</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                    <p>© 2024 (주)휴먼아이티. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Toggle FAQ accordion
+        function toggleFAQ(button) {
+            const answer = button.nextElementSibling;
+            const icon = button.querySelector('.faq-icon');
+            const allAnswers = document.querySelectorAll('.faq-answer');
+            const allIcons = document.querySelectorAll('.faq-icon');
+            
+            // Close all other answers
+            allAnswers.forEach(item => {
+                if (item !== answer && item.classList.contains('active')) {
+                    item.classList.remove('active');
+                }
+            });
+            
+            // Reset all icons
+            allIcons.forEach(item => {
+                if (item !== icon && item.classList.contains('active')) {
+                    item.classList.remove('active');
+                }
+            });
+            
+            // Toggle current answer
+            answer.classList.toggle('active');
+            icon.classList.toggle('active');
+        }
+
+        // Filter FAQ by category
+        function filterFAQ(category) {
+            const items = document.querySelectorAll('.faq-item');
+            const buttons = document.querySelectorAll('.category-btn');
+            
+            // Update button styles
+            buttons.forEach(btn => {
+                if (btn.dataset.category === category) {
+                    btn.classList.remove('bg-gray-200', 'text-gray-700');
+                    btn.classList.add('bg-blue-600', 'text-white', 'active');
+                } else {
+                    btn.classList.remove('bg-blue-600', 'text-white', 'active');
+                    btn.classList.add('bg-gray-200', 'text-gray-700');
+                }
+            });
+            
+            // Filter items
+            items.forEach(item => {
+                if (category === 'all' || item.dataset.category === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Search FAQ
+        function searchFAQ() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const items = document.querySelectorAll('.faq-item');
+            
+            items.forEach(item => {
+                const question = item.querySelector('h3').textContent.toLowerCase();
+                const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+                
+                if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Enter key for search
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchFAQ();
+            }
+        });
+    </script>
+</body>
+</html>
