@@ -18,24 +18,43 @@ function checkAuth() {
     const token = localStorage.getItem('token');
     const user = localStorage.getItem('user');
     
+    console.log('Token exists:', !!token);
+    console.log('User exists:', !!user);
+    
     if (!token || !user) {
         // 로그인되지 않은 경우 로그인 페이지로 리다이렉트
-        console.log('No token or user, redirecting to login');
-        window.location.href = '/admin/index.html';
+        console.warn('⚠️ No token or user found!');
+        console.log('Token:', token);
+        console.log('User:', user);
+        
+        // 잠깐 대기 후 리다이렉트 (디버깅용)
+        setTimeout(function() {
+            console.log('Redirecting to login page...');
+            window.location.href = '/admin/index.html';
+        }, 100);
         return false;
     }
     
     // 토큰 만료 확인
     try {
         const tokenData = decodeToken(token);
+        console.log('Decoded token:', tokenData);
+        
         if (tokenData && tokenData.exp) {
             const now = Date.now();
+            console.log('Current time:', now);
+            console.log('Token expiry:', tokenData.exp);
+            console.log('Token valid:', now < tokenData.exp);
+            
             if (now > tokenData.exp) {
-                console.log('Token expired, redirecting to login');
+                console.warn('⚠️ Token expired!');
                 alert('세션이 만료되었습니다. 다시 로그인해주세요.');
                 localStorage.removeItem('token');
                 localStorage.removeItem('user');
-                window.location.href = '/admin/index.html';
+                
+                setTimeout(function() {
+                    window.location.href = '/admin/index.html';
+                }, 100);
                 return false;
             }
         }
@@ -47,14 +66,18 @@ function checkAuth() {
     // 사용자 정보 표시
     try {
         const userData = JSON.parse(user);
+        console.log('User data:', userData);
+        
         const usernameEl = document.getElementById('adminUsername');
         if (usernameEl) {
             usernameEl.textContent = userData.username || 'Admin';
+            console.log('Username displayed:', userData.username);
         }
     } catch (e) {
         console.error('Failed to parse user data:', e);
     }
     
+    console.log('✅ Authentication check passed');
     return true;
 }
 
@@ -143,9 +166,18 @@ function showError(message) {
 // 페이지 로드 시 자동 실행
 document.addEventListener('DOMContentLoaded', function() {
     // 로그인 페이지가 아닌 경우에만 인증 체크
-    if (!window.location.pathname.includes('/admin/index.html') && 
-        !window.location.pathname.endsWith('/admin/') &&
-        !window.location.pathname.endsWith('/admin')) {
-        checkAuth();
+    const isLoginPage = window.location.pathname.includes('/admin/index.html') || 
+                        window.location.pathname.endsWith('/admin/') ||
+                        window.location.pathname.endsWith('/admin');
+    
+    console.log('Current path:', window.location.pathname);
+    console.log('Is login page:', isLoginPage);
+    
+    if (!isLoginPage) {
+        console.log('Checking authentication...');
+        const hasAuth = checkAuth();
+        console.log('Auth check result:', hasAuth);
+    } else {
+        console.log('Login page detected, skipping auth check');
     }
 });
