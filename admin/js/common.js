@@ -15,8 +15,8 @@ function decodeToken(token) {
 
 // 인증 확인
 function checkAuth() {
-    const token = localStorage.getItem('token');
-    const user = localStorage.getItem('user');
+    const token = localStorage.getItem('adminToken');
+    const user = localStorage.getItem('adminUser');
     
     console.log('Token exists:', !!token);
     console.log('User exists:', !!user);
@@ -49,8 +49,8 @@ function checkAuth() {
             if (now > tokenData.exp) {
                 console.warn('⚠️ Token expired!');
                 alert('세션이 만료되었습니다. 다시 로그인해주세요.');
-                localStorage.removeItem('token');
-                localStorage.removeItem('user');
+                localStorage.removeItem('adminToken');
+                localStorage.removeItem('adminUser');
                 
                 setTimeout(function() {
                     window.location.href = '/admin/index.html';
@@ -83,8 +83,8 @@ function checkAuth() {
 
 // 로그아웃
 function logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
+    localStorage.removeItem('adminToken');
+    localStorage.removeItem('adminUser');
     window.location.href = '/admin/index.html';
 }
 
@@ -97,7 +97,7 @@ function confirmLogout() {
 
 // API 요청 헬퍼
 async function apiRequest(url, options = {}) {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('adminToken');
     
     const defaultOptions = {
         headers: {
