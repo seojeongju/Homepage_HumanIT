@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배리어프리 키오스크 - 주식회사 모하</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-fadeInUp {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        .dropdown-menu {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+        .group:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <!-- Navigation -->
+    <nav class="bg-white/90 backdrop-blur-md shadow-lg sticky top-0 z-50 border-b-2 border-purple-100">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="/index.html" class="flex items-center space-x-3 group">
+                    <div class="w-12 h-12 bg-gradient-to-br from-purple-600 to-pink-600 rounded-xl flex items-center justify-center transform group-hover:rotate-6 transition-transform duration-300">
+                        <span class="text-white font-bold text-xl">모하</span>
+                    </div>
+                    <span class="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                        주식회사 모하
+                    </span>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-1">
+                    <a href="/index.html" class="px-4 py-2 rounded-lg hover:bg-purple-50 transition-all duration-300 font-medium text-gray-700 hover:text-purple-600">
+                        홈
+                    </a>
+                    
+                    <!-- 회사소개 Dropdown -->
+                    <div class="relative group">
+                        <button class="px-4 py-2 rounded-lg hover:bg-purple-50 transition-all duration-300 font-medium text-gray-700 hover:text-purple-600 flex items-center gap-1">
+                            회사소개
+                            <i class="fas fa-chevron-down text-xs group-hover:rotate-180 transition-transform duration-300"></i>
+                        </button>
+                        <div class="dropdown-menu absolute top-full left-1/2 -translate-x-1/2 mt-2 w-56 bg-white/95 backdrop-blur-md rounded-xl shadow-2xl border border-purple-100 py-2">
+                            <a href="/about/index.html#vision" class="block px-6 py-3 hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 transition-all duration-300 text-gray-700 hover:text-purple-600 border-l-4 border-transparent hover:border-purple-500">
+                                <i class="fas fa-lightbulb mr-2"></i>비전
+                            </a>
+                            <a href="/about/index.html#organization" class="block px-6 py-3 hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 transition-all duration-300 text-gray-700 hover:text-purple-600 border-l-4 border-transparent hover:border-purple-500">
+                                <i class="fas fa-sitemap mr-2"></i>조직도
+                            </a>
+                            <a href="/about/index.html#history" class="block px-6 py-3 hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 transition-all duration-300 text-gray-700 hover:text-purple-600 border-l-4 border-transparent hover:border-purple-500">
+                                <i class="fas fa-history mr-2"></i>연혁
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 사업영역 Link -->
+                    <a href="/business/index.html" class="px-4 py-2 rounded-lg hover:bg-purple-50 transition-all duration-300 font-medium text-gray-700 hover:text-purple-600">
+                        사업영역
+                    </a>
+
+                    <!-- 제품소개 Dropdown -->
+                    <div class="relative group">
+                        <button class="px-4 py-2 rounded-lg bg-gradient-to-r from-purple-50 to-pink-50 transition-all duration-300 font-medium text-purple-600 flex items-center gap-1 shadow-sm">
+                            제품소개
+                            <i class="fas fa-chevron-down text-xs group-hover:rotate-180 transition-transform duration-300"></i>
+                        </button>
+                        <div class="dropdown-menu absolute top-full left-1/2 -translate-x-1/2 mt-2 w-56 bg-white/95 backdrop-blur-md rounded-xl shadow-2xl border border-purple-100 py-2">
+                            <a href="/products/wooridoori.html" class="block px-6 py-3 hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 transition-all duration-300 text-gray-700 hover:text-purple-600 border-l-4 border-transparent hover:border-purple-500">
+                                <i class="fas fa-heart mr-2"></i>우리두리 돌봄인형
+                            </a>
+                            <a href="/products/kiosk.html" class="block px-6 py-3 bg-gradient-to-r from-purple-50 to-pink-50 text-purple-600 border-l-4 border-purple-500">
+                                <i class="fas fa-desktop mr-2"></i>배리어프리 키오스크
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 연구개발 Link -->
+                    <a href="/research/capability.html" class="px-4 py-2 rounded-lg hover:bg-purple-50 transition-all duration-300 font-medium text-gray-700 hover:text-purple-600">
+                        연구개발
+                    </a>
+
+                    <a href="/index.html#contact" class="px-4 py-2 rounded-lg hover:bg-purple-50 transition-all duration-300 font-medium text-gray-700 hover:text-purple-600">
+                        문의하기
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden text-gray-600 hover:text-purple-600" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="hidden md:hidden pb-4">
+                <a href="/index.html" class="block px-4 py-2 hover:bg-purple-50 rounded-lg transition-colors">홈</a>
+                <a href="/about/index.html" class="block px-4 py-2 hover:bg-purple-50 rounded-lg transition-colors">회사소개</a>
+                <a href="/business/index.html" class="block px-4 py-2 hover:bg-purple-50 rounded-lg transition-colors">사업영역</a>
+                <a href="/products/wooridoori.html" class="block px-4 py-3 hover:bg-purple-50 rounded-lg transition-colors pl-8">
+                    <i class="fas fa-heart mr-2"></i>우리두리 돌봄인형
+                </a>
+                <a href="/products/kiosk.html" class="block px-4 py-3 bg-purple-50 rounded-lg text-purple-600 pl-8">
+                    <i class="fas fa-desktop mr-2"></i>배리어프리 키오스크
+                </a>
+                <a href="/research/capability.html" class="block px-4 py-2 hover:bg-purple-50 rounded-lg transition-colors">연구개발</a>
+                <a href="/index.html#contact" class="block px-4 py-2 hover:bg-purple-50 rounded-lg transition-colors">문의하기</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative py-20 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-100 via-purple-50 to-pink-100 opacity-50"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-4xl mx-auto text-center animate-fadeInUp">
+                <div class="inline-block mb-6">
+                    <span class="px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full text-sm font-semibold shadow-lg">
+                        <i class="fas fa-universal-access mr-2"></i>포용적 디지털 접근성
+                    </span>
+                </div>
+                <h1 class="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                    배리어프리 키오스크
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed">
+                    누구나 쉽게 사용할 수 있는 무장애 키오스크 솔루션
+                </p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <div class="px-6 py-3 bg-white rounded-lg shadow-md">
+                        <i class="fas fa-wheelchair text-blue-500 mr-2"></i>
+                        <span class="font-semibold text-gray-700">휠체어 사용자</span>
+                    </div>
+                    <div class="px-6 py-3 bg-white rounded-lg shadow-md">
+                        <i class="fas fa-eye-slash text-purple-500 mr-2"></i>
+                        <span class="font-semibold text-gray-700">시각장애인</span>
+                    </div>
+                    <div class="px-6 py-3 bg-white rounded-lg shadow-md">
+                        <i class="fas fa-deaf text-pink-500 mr-2"></i>
+                        <span class="font-semibold text-gray-700">청각장애인</span>
+                    </div>
+                    <div class="px-6 py-3 bg-white rounded-lg shadow-md">
+                        <i class="fas fa-user-friends text-green-500 mr-2"></i>
+                        <span class="font-semibold text-gray-700">고령자</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <!-- Product Introduction -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                <!-- Product Image -->
+                <div class="bg-white rounded-xl shadow-lg p-8 flex items-center justify-center">
+                    <img src="https://cdn1.genspark.ai/user-upload-image/rmbg_generated/0_73a1dff1-397f-41e7-80a6-c1057803faa4" 
+                         alt="배리어프리 키오스크" 
+                         class="w-full h-96 object-contain drop-shadow-2xl">
+                </div>
+
+                <!-- Product Overview -->
+                <div class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl shadow-lg p-8">
+                    <h2 class="text-3xl font-bold mb-6 text-gray-800">
+                        <i class="fas fa-info-circle text-blue-500 mr-3"></i>제품 개요
+                    </h2>
+                    <div class="space-y-4">
+                        <p class="text-gray-700 leading-relaxed text-lg">
+                            배리어프리 키오스크는 장애인, 고령자, 디지털 소외계층도 쉽게 사용할 수 있도록 설계된 차세대 무장애 키오스크 솔루션입니다.
+                        </p>
+                        <div class="bg-white rounded-lg p-4 shadow-md">
+                            <h3 class="font-bold text-lg mb-3 text-gray-800">핵심 특징</h3>
+                            <ul class="space-y-2">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-blue-500 mr-3 mt-1"></i>
+                                    <span class="text-gray-700">높이 조절 가능한 하드웨어 설계</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-blue-500 mr-3 mt-1"></i>
+                                    <span class="text-gray-700">음성 안내 및 수어 영상 제공</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-blue-500 mr-3 mt-1"></i>
+                                    <span class="text-gray-700">간편한 UI/UX 인터페이스</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-blue-500 mr-3 mt-1"></i>
+                                    <span class="text-gray-700">다국어 지원 및 큰 글씨 모드</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-blue-500 mr-3 mt-1"></i>
+                                    <span class="text-gray-700">결제 시스템 통합 (현금, 카드, 간편결제)</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key Features -->
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold mb-8 text-center text-gray-800">
+                    <i class="fas fa-star text-yellow-500 mr-3"></i>주요 기능
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Feature 1 -->
+                    <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                        <div class="w-16 h-16 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center mb-4 shadow-lg">
+                            <i class="fas fa-arrows-alt-v text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-gray-800">높이 조절</h3>
+                        <p class="text-gray-600">
+                            휠체어 사용자와 어린이도 편리하게 사용할 수 있도록 화면 높이를 자동으로 조절합니다.
+                        </p>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                        <div class="w-16 h-16 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center mb-4 shadow-lg">
+                            <i class="fas fa-volume-up text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-gray-800">음성 안내</h3>
+                        <p class="text-gray-600">
+                            시각장애인을 위한 TTS 기반 음성 안내로 모든 메뉴와 기능을 음성으로 설명합니다.
+                        </p>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                        <div class="w-16 h-16 bg-gradient-to-br from-pink-400 to-pink-600 rounded-full flex items-center justify-center mb-4 shadow-lg">
+                            <i class="fas fa-sign-language text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-gray-800">수어 영상</h3>
+                        <p class="text-gray-600">
+                            청각장애인을 위한 수어 통역 영상을 실시간으로 제공하여 원활한 소통을 지원합니다.
+                        </p>
+                    </div>
+
+                    <!-- Feature 4 -->
+                    <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                        <div class="w-16 h-16 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center mb-4 shadow-lg">
+                            <i class="fas fa-mobile-alt text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-gray-800">간편 UI</h3>
+                        <p class="text-gray-600">
+                            큰 버튼, 명확한 아이콘, 단순한 메뉴 구조로 누구나 쉽게 사용할 수 있습니다.
+                        </p>
+                    </div>
+
+                    <!-- Feature 5 -->
+                    <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                        <div class="w-16 h-16 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center mb-4 shadow-lg">
+                            <i class="fas fa-language text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-gray-800">다국어 지원</h3>
+                        <p class="text-gray-600">
+                            한국어, 영어, 중국어, 일본어 등 다양한 언어를 지원하여 외국인도 편리하게 이용 가능합니다.
+                        </p>
+                    </div>
+
+                    <!-- Feature 6 -->
+                    <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                        <div class="w-16 h-16 bg-gradient-to-br from-red-400 to-red-600 rounded-full flex items-center justify-center mb-4 shadow-lg">
+                            <i class="fas fa-credit-card text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-gray-800">통합 결제</h3>
+                        <p class="text-gray-600">
+                            현금, 카드, QR코드, 간편결제 등 다양한 결제 수단을 하나의 키오스크에서 처리합니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Revenue Model -->
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold mb-8 text-center text-gray-800">
+                    <i class="fas fa-chart-line text-green-500 mr-3"></i>수익 모델
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <!-- Hardware Sales -->
+                    <div class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl shadow-lg p-6 hover:shadow-2xl transition-all duration-300">
+                        <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mb-4 shadow-lg">
+                            <i class="fas fa-desktop text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 text-gray-800">H/W 제품 판매</h3>
+                        <p class="text-gray-600 mb-4">
+                            배리어프리 키오스크 하드웨어 판매를 통한 일회성 수익 창출
+                        </p>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-blue-500 mr-2 mt-1"></i>
+                                <span>표준형 키오스크</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-blue-500 mr-2 mt-1"></i>
+                                <span>맞춤형 키오스크</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-blue-500 mr-2 mt-1"></i>
+                                <span>주변기기 및 부속품</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Advertising -->
+                    <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl shadow-lg p-6 hover:shadow-2xl transition-all duration-300">
+                        <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mb-4 shadow-lg">
+                            <i class="fas fa-ad text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 text-gray-800">광고 수익</h3>
+                        <p class="text-gray-600 mb-4">
+                            키오스크 유휴 시간 및 대기 화면을 활용한 광고 플랫폼 운영
+                        </p>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-purple-500 mr-2 mt-1"></i>
+                                <span>지역 맞춤형 광고</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-purple-500 mr-2 mt-1"></i>
+                                <span>타겟 광고 제공</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-purple-500 mr-2 mt-1"></i>
+                                <span>동영상/이미지 광고</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Smart Store Support -->
+                    <div class="bg-gradient-to-br from-green-50 to-teal-50 rounded-xl shadow-lg p-6 hover:shadow-2xl transition-all duration-300">
+                        <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mb-4 shadow-lg">
+                            <i class="fas fa-store text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 text-gray-800">스마트 상점 지원</h3>
+                        <p class="text-gray-600 mb-4">
+                            정부 및 지자체 스마트 상점 지원 사업 연계를 통한 B2G 사업
+                        </p>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                <span>중소상공인 지원 사업</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                <span>장애인 편의시설 보조금</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                <span>공공기관 납품</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Specifications -->
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold mb-8 text-center text-gray-800">
+                    <i class="fas fa-cog text-gray-500 mr-3"></i>기술 사양
+                </h2>
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Hardware Specs -->
+                        <div>
+                            <h3 class="text-2xl font-bold mb-4 text-gray-800 flex items-center">
+                                <i class="fas fa-microchip text-blue-500 mr-3"></i>하드웨어 사양
+                            </h3>
+                            <div class="space-y-3">
+                                <div class="flex justify-between p-3 bg-gray-50 rounded-lg">
+                                    <span class="font-semibold text-gray-700">디스플레이</span>
+                                    <span class="text-gray-600">32" 터치스크린 (FHD)</span>
+                                </div>
+                                <div class="flex justify-between p-3 bg-gray-50 rounded-lg">
+                                    <span class="font-semibold text-gray-700">높이 조절</span>
+                                    <span class="text-gray-600">90cm ~ 150cm (전동식)</span>
+                                </div>
+                                <div class="flex justify-between p-3 bg-gray-50 rounded-lg">
+                                    <span class="font-semibold text-gray-700">프로세서</span>
+                                    <span class="text-gray-600">Intel Core i5 이상</span>
+                                </div>
+                                <div class="flex justify-between p-3 bg-gray-50 rounded-lg">
+                                    <span class="font-semibold text-gray-700">메모리</span>
+                                    <span class="text-gray-600">8GB RAM / 256GB SSD</span>
+                                </div>
+                                <div class="flex justify-between p-3 bg-gray-50 rounded-lg">
+                                    <span class="font-semibold text-gray-700">주변기기</span>
+                                    <span class="text-gray-600">카드리더, 영수증 프린터, 카메라</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Software Specs -->
+                        <div>
+                            <h3 class="text-2xl font-bold mb-4 text-gray-800 flex items-center">
+                                <i class="fas fa-code text-purple-500 mr-3"></i>소프트웨어 사양
+                            </h3>
+                            <div class="space-y-3">
+                                <div class="flex justify-between p-3 bg-gray-50 rounded-lg">
+                                    <span class="font-semibold text-gray-700">OS</span>
+                                    <span class="text-gray-600">Windows 10/11 IoT Enterprise</span>
+                                </div>
+                                <div class="flex justify-between p-3 bg-gray-50 rounded-lg">
+                                    <span class="font-semibold text-gray-700">음성 안내</span>
+                                    <span class="text-gray-600">TTS 엔진 통합</span>
+                                </div>
+                                <div class="flex justify-between p-3 bg-gray-50 rounded-lg">
+                                    <span class="font-semibold text-gray-700">언어 지원</span>
+                                    <span class="text-gray-600">한/영/중/일 4개국어</span>
+                                </div>
+                                <div class="flex justify-between p-3 bg-gray-50 rounded-lg">
+                                    <span class="font-semibold text-gray-700">접근성 기능</span>
+                                    <span class="text-gray-600">WCAG 2.1 Level AA 준수</span>
+                                </div>
+                                <div class="flex justify-between p-3 bg-gray-50 rounded-lg">
+                                    <span class="font-semibold text-gray-700">보안</span>
+                                    <span class="text-gray-600">SSL/TLS 암호화, PCI-DSS 인증</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Use Cases -->
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold mb-8 text-center text-gray-800">
+                    <i class="fas fa-map-marked-alt text-orange-500 mr-3"></i>활용 사례
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Use Case 1 -->
+                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl shadow-lg p-6 text-center hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                        <div class="w-20 h-20 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                            <i class="fas fa-utensils text-white text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 text-gray-800">음식점</h3>
+                        <p class="text-gray-600">패스트푸드점, 카페, 레스토랑 등에서 주문 및 결제</p>
+                    </div>
+
+                    <!-- Use Case 2 -->
+                    <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl shadow-lg p-6 text-center hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                        <div class="w-20 h-20 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                            <i class="fas fa-hospital text-white text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 text-gray-800">의료기관</h3>
+                        <p class="text-gray-600">병원 접수, 예약 확인, 수납 업무 자동화</p>
+                    </div>
+
+                    <!-- Use Case 3 -->
+                    <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl shadow-lg p-6 text-center hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                        <div class="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                            <i class="fas fa-university text-white text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 text-gray-800">공공기관</h3>
+                        <p class="text-gray-600">민원 접수, 증명서 발급, 안내 서비스</p>
+                    </div>
+
+                    <!-- Use Case 4 -->
+                    <div class="bg-gradient-to-br from-pink-50 to-pink-100 rounded-xl shadow-lg p-6 text-center hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                        <div class="w-20 h-20 bg-pink-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                            <i class="fas fa-shopping-cart text-white text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 text-gray-800">유통매장</h3>
+                        <p class="text-gray-600">편의점, 마트에서 무인 계산 서비스</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Benefits Section -->
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold mb-8 text-center text-gray-800">
+                    <i class="fas fa-trophy text-yellow-500 mr-3"></i>도입 효과
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- For Business -->
+                    <div class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl shadow-lg p-8">
+                        <h3 class="text-2xl font-bold mb-4 text-gray-800 flex items-center">
+                            <i class="fas fa-briefcase text-blue-500 mr-3"></i>사업자 측면
+                        </h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-arrow-right text-blue-500 mr-3 mt-1"></i>
+                                <div>
+                                    <span class="font-semibold text-gray-800">인건비 절감:</span>
+                                    <span class="text-gray-600"> 무인 주문/결제로 운영 효율 향상</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-arrow-right text-blue-500 mr-3 mt-1"></i>
+                                <div>
+                                    <span class="font-semibold text-gray-800">고객 확대:</span>
+                                    <span class="text-gray-600"> 장애인 및 고령자 고객 접근성 향상</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-arrow-right text-blue-500 mr-3 mt-1"></i>
+                                <div>
+                                    <span class="font-semibold text-gray-800">정부 지원:</span>
+                                    <span class="text-gray-600"> 장애인 편의시설 설치 보조금 수혜 가능</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-arrow-right text-blue-500 mr-3 mt-1"></i>
+                                <div>
+                                    <span class="font-semibold text-gray-800">브랜드 이미지:</span>
+                                    <span class="text-gray-600"> 사회적 책임 실천 기업 이미지 제고</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- For Users -->
+                    <div class="bg-gradient-to-br from-pink-50 to-purple-50 rounded-xl shadow-lg p-8">
+                        <h3 class="text-2xl font-bold mb-4 text-gray-800 flex items-center">
+                            <i class="fas fa-users text-pink-500 mr-3"></i>사용자 측면
+                        </h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-arrow-right text-pink-500 mr-3 mt-1"></i>
+                                <div>
+                                    <span class="font-semibold text-gray-800">편의성:</span>
+                                    <span class="text-gray-600"> 누구나 쉽고 빠르게 서비스 이용</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-arrow-right text-pink-500 mr-3 mt-1"></i>
+                                <div>
+                                    <span class="font-semibold text-gray-800">자율성:</span>
+                                    <span class="text-gray-600"> 도움 없이 독립적으로 주문 가능</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-arrow-right text-pink-500 mr-3 mt-1"></i>
+                                <div>
+                                    <span class="font-semibold text-gray-800">접근성:</span>
+                                    <span class="text-gray-600"> 신체적·감각적 장애 극복</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-arrow-right text-pink-500 mr-3 mt-1"></i>
+                                <div>
+                                    <span class="font-semibold text-gray-800">포용:</span>
+                                    <span class="text-gray-600"> 디지털 소외 없는 포용적 사회 실현</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Government Support -->
+            <div class="mb-12">
+                <div class="bg-gradient-to-r from-green-500 to-teal-500 rounded-xl shadow-2xl p-8 text-white">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-landmark text-green-500 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-3xl font-bold">정부 지원 사업 연계</h2>
+                            <p class="text-green-100">장애인 편의시설 설치 지원 및 스마트 상점 육성 사업</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">장애인편의시설 설치지원</h3>
+                            <p class="text-green-100 text-sm">중소기업 및 소상공인 대상 최대 70% 보조금 지원</p>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">스마트상점 기술보급 사업</h3>
+                            <p class="text-green-100 text-sm">중소벤처기업부 주관 키오스크 도입 지원</p>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+                            <h3 class="font-bold text-lg mb-2">공공시설 무장애 인증</h3>
+                            <p class="text-green-100 text-sm">공공기관 장애물 없는 생활환경(BF) 인증 의무화</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Section -->
+            <div class="text-center bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-xl shadow-2xl p-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+                    배리어프리 키오스크 도입 문의
+                </h2>
+                <p class="text-xl text-white/90 mb-8">
+                    누구나 쉽게 사용할 수 있는 무장애 키오스크로 고객 접근성을 높이세요
+                </p>
+                <a href="/index.html#contact" 
+                   class="inline-block bg-white text-purple-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1">
+                    <i class="fas fa-envelope mr-2"></i>지금 문의하기
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-r from-purple-900 via-purple-800 to-pink-900 text-white py-12 mt-20">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 flex items-center">
+                        <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center mr-3">
+                            <span class="text-purple-600 font-bold">모하</span>
+                        </div>
+                        주식회사 모하
+                    </h3>
+                    <p class="text-purple-200">
+                        기술로 더 나은 세상을 만들어갑니다
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">빠른 링크</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/about/index.html" class="text-purple-200 hover:text-white transition-colors">회사소개</a></li>
+                        <li><a href="/business/index.html" class="text-purple-200 hover:text-white transition-colors">사업영역</a></li>
+                        <li><a href="/products/wooridoori.html" class="text-purple-200 hover:text-white transition-colors">우리두리 돌봄인형</a></li>
+                        <li><a href="/products/kiosk.html" class="text-purple-200 hover:text-white transition-colors">배리어프리 키오스크</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">문의하기</h4>
+                    <ul class="space-y-2 text-purple-200">
+                        <li><i class="fas fa-envelope mr-2"></i>contact@moha.co.kr</li>
+                        <li><i class="fas fa-phone mr-2"></i>02-1234-5678</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-purple-700 pt-8 text-center text-purple-200">
+                <p>&copy; 2024 주식회사 모하. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        }
+    </script>
+</body>
+</html>
