@@ -165,7 +165,7 @@ export async function onRequestDelete(context) {
   const db = env.DB as D1Database;
   const id = params.id;
 
-  try:
+  try {
     // 인증 확인
     const authHeader = request.headers.get('Authorization');
     if (!authHeader || !authHeader.startsWith('Bearer ')) {

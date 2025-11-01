@@ -1,0 +1,14 @@
+{
+  "name": "humanit-webapp",
+  "version": "1.0.0",
+  "description": "HumanIT Corporation Website",
+  "scripts": {
+    "dev": "wrangler pages dev . --d1 DB=humanit-production",
+    "deploy": "wrangler pages deploy .",
+    "type-check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20241127.0",
+    "typescript": "^5.7.2"
+  }
+}
