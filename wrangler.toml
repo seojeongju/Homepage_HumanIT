@@ -5,11 +5,10 @@ compatibility_date = "2024-11-01"
 pages_build_output_dir = "."
 
 # D1 Database 바인딩
-# Cloudflare 대시보드에서 실제 database_id로 교체 필요
-# [[d1_databases]]
-# binding = "DB"
-# database_name = "humanit-production"
-# database_id = "your-actual-database-id"
+[[d1_databases]]
+binding = "DB"
+database_name = "humanit-production"
+database_id = "c451e29d-38aa-462f-9763-c5c5cbdfa60a"
 
 # 환경 변수 (로컬 개발용)
 [vars]
