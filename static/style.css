@@ -1,0 +1,4 @@
+/* 추가 커스텀 스타일 */
+.hero-slide {
+    transition: opacity 1s ease-in-out;
+}
