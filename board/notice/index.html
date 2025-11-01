@@ -147,7 +147,7 @@
                             </thead>
                             <tbody class="divide-y divide-gray-200">
                                 <!-- 게시글 1 -->
-                                <tr class="hover:bg-gray-50 transition-colors duration-150 cursor-pointer" onclick="location.href='/board/notice/1'">
+                                <tr id="post-1" class="hover:bg-gray-50 transition-colors duration-150 cursor-pointer scroll-mt-20" onclick="location.href='/board/notice/1'">
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
                                             <i class="fas fa-star mr-1"></i> 공지
@@ -171,7 +171,7 @@
                                 </tr>
 
                                 <!-- 게시글 2 -->
-                                <tr class="hover:bg-gray-50 transition-colors duration-150 cursor-pointer" onclick="location.href='/board/notice/2'">
+                                <tr id="post-2" class="hover:bg-gray-50 transition-colors duration-150 cursor-pointer scroll-mt-20" onclick="location.href='/board/notice/2'">
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2</td>
                                     <td class="px-6 py-4">
                                         <div class="text-sm font-medium text-gray-900 hover:text-blue-600">시스템 업데이트 안내</div>
@@ -186,7 +186,7 @@
                                 </tr>
 
                                 <!-- 게시글 3 -->
-                                <tr class="hover:bg-gray-50 transition-colors duration-150 cursor-pointer" onclick="location.href='/board/notice/3'">
+                                <tr id="post-3" class="hover:bg-gray-50 transition-colors duration-150 cursor-pointer scroll-mt-20" onclick="location.href='/board/notice/3'">
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">1</td>
                                     <td class="px-6 py-4">
                                         <div class="text-sm font-medium text-gray-900 hover:text-blue-600">배리어프리 키오스크 설치 완료</div>
@@ -206,7 +206,7 @@
                     <!-- 게시글 목록 (모바일) -->
                     <div class="md:hidden divide-y divide-gray-200">
                         <!-- 게시글 1 -->
-                        <a href="/board/notice/1" class="block p-4 hover:bg-gray-50 transition-colors">
+                        <a id="post-1-mobile" href="/board/notice/1" class="block p-4 hover:bg-gray-50 transition-colors scroll-mt-20">
                             <div class="flex items-start justify-between mb-2">
                                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
                                     <i class="fas fa-star mr-1"></i> 공지
@@ -222,7 +222,7 @@
                         </a>
 
                         <!-- 게시글 2 -->
-                        <a href="/board/notice/2" class="block p-4 hover:bg-gray-50 transition-colors">
+                        <a id="post-2-mobile" href="/board/notice/2" class="block p-4 hover:bg-gray-50 transition-colors scroll-mt-20">
                             <div class="flex items-start justify-between mb-2">
                                 <span class="text-xs text-gray-500">번호 2</span>
                                 <span class="text-xs text-gray-500">2025.10.27</span>
@@ -235,7 +235,7 @@
                         </a>
 
                         <!-- 게시글 3 -->
-                        <a href="/board/notice/3" class="block p-4 hover:bg-gray-50 transition-colors">
+                        <a id="post-3-mobile" href="/board/notice/3" class="block p-4 hover:bg-gray-50 transition-colors scroll-mt-20">
                             <div class="flex items-start justify-between mb-2">
                                 <span class="text-xs text-gray-500">번호 1</span>
                                 <span class="text-xs text-gray-500">2025.10.26</span>
