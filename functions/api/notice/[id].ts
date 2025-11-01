@@ -8,6 +8,18 @@ interface Env {
 // 공지사항 상세 조회
 export async function onRequestGet(context) {
   const { params, env } = context;
+  
+  if (!env.DB) {
+    return new Response(JSON.stringify({
+      success: false,
+      message: 'Database binding is not configured.',
+      error: 'DB_BINDING_MISSING'
+    }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
+  
   const db = env.DB as D1Database;
   const id = params.id;
 
@@ -55,6 +67,18 @@ export async function onRequestGet(context) {
 // 공지사항 수정
 export async function onRequestPut(context) {
   const { params, request, env } = context;
+  
+  if (!env.DB) {
+    return new Response(JSON.stringify({
+      success: false,
+      message: 'Database binding is not configured.',
+      error: 'DB_BINDING_MISSING'
+    }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
+  
   const db = env.DB as D1Database;
   const id = params.id;
 
@@ -126,10 +150,22 @@ export async function onRequestPut(context) {
 // 공지사항 삭제
 export async function onRequestDelete(context) {
   const { params, request, env } = context;
+  
+  if (!env.DB) {
+    return new Response(JSON.stringify({
+      success: false,
+      message: 'Database binding is not configured.',
+      error: 'DB_BINDING_MISSING'
+    }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
+  
   const db = env.DB as D1Database;
   const id = params.id;
 
-  try {
+  try:
     // 인증 확인
     const authHeader = request.headers.get('Authorization');
     if (!authHeader || !authHeader.startsWith('Bearer ')) {

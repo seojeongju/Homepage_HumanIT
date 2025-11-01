@@ -7,6 +7,20 @@ interface Env {
 
 export async function onRequestGet(context) {
   const { request, env } = context;
+  
+  // 디버깅: DB 바인딩 확인
+  if (!env.DB) {
+    console.error('DB binding is missing!');
+    return new Response(JSON.stringify({
+      success: false,
+      message: 'Database binding is not configured. Please add D1 binding in Cloudflare Pages settings.',
+      error: 'DB_BINDING_MISSING'
+    }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
+  
   const db = env.DB as D1Database;
   const url = new URL(request.url);
   
@@ -53,7 +67,9 @@ export async function onRequestGet(context) {
     console.error('Notice list error:', error);
     return new Response(JSON.stringify({
       success: false,
-      message: '공지사항 목록 조회 중 오류가 발생했습니다.'
+      message: '공지사항 목록 조회 중 오류가 발생했습니다.',
+      error: error.message || String(error),
+      stack: error.stack || 'No stack trace'
     }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' }
@@ -64,6 +80,19 @@ export async function onRequestGet(context) {
 // 공지사항 생성 API
 export async function onRequestPost(context) {
   const { request, env } = context;
+  
+  // 디버깅: DB 바인딩 확인
+  if (!env.DB) {
+    return new Response(JSON.stringify({
+      success: false,
+      message: 'Database binding is not configured.',
+      error: 'DB_BINDING_MISSING'
+    }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
+  
   const db = env.DB as D1Database;
 
   try {
@@ -112,7 +141,8 @@ export async function onRequestPost(context) {
     console.error('Notice create error:', error);
     return new Response(JSON.stringify({
       success: false,
-      message: '공지사항 생성 중 오류가 발생했습니다.'
+      message: '공지사항 생성 중 오류가 발생했습니다.',
+      error: error.message || String(error)
     }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' }

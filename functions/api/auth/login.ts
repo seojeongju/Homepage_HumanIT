@@ -8,6 +8,19 @@ interface Env {
 
 export async function onRequestPost(context) {
   const { request, env } = context;
+  
+  // DB 바인딩 확인
+  if (!env.DB) {
+    return new Response(JSON.stringify({
+      success: false,
+      message: 'Database binding is not configured.',
+      error: 'DB_BINDING_MISSING'
+    }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
+  
   const db = env.DB as D1Database;
 
   try {
@@ -85,7 +98,8 @@ export async function onRequestPost(context) {
     console.error('Login error:', error);
     return new Response(JSON.stringify({
       success: false,
-      message: '로그인 처리 중 오류가 발생했습니다.'
+      message: '로그인 처리 중 오류가 발생했습니다.',
+      error: error.message || String(error)
     }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' }
