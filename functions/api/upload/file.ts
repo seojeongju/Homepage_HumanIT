@@ -66,9 +66,7 @@ export async function onRequestPost(context) {
     });
 
     // 공개 URL 생성
-    // R2 Public URL 형식: https://pub-<account_hash>.r2.dev/<filename>
-    // 또는 Custom Domain을 사용하는 경우
-    const publicUrl = `https://pub-YOUR_R2_DOMAIN/${fileName}`;
+    const publicUrl = `https://pub-2a45668ee7e146899718a9f151236a92.r2.dev/${fileName}`;
 
     return new Response(JSON.stringify({
       success: true,

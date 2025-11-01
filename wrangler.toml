@@ -12,6 +12,11 @@ database_id = "c451e29d-38aa-462f-9763-c5c5cbdfa60a"
 ENVIRONMENT = "production"
 JWT_SECRET = "your-secret-key-change-this-in-production"
 
+# R2 Bucket 바인딩 (파일 업로드용)
+[[r2_buckets]]
+binding = "R2_BUCKET"
+bucket_name = "humanit-uploads"
+
 # KV Namespace (세션 저장용 - 선택사항)
 # [[kv_namespaces]]
 # binding = "SESSIONS"
