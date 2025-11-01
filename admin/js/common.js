@@ -1,6 +1,18 @@
 // 공통 유틸리티 함수
 // 모든 관리자 페이지에서 사용
 
+// 토큰 디코딩 (Base64)
+function decodeToken(token) {
+    try {
+        const payload = token.split('.')[1] || token;
+        const decoded = atob(payload);
+        return JSON.parse(decoded);
+    } catch (e) {
+        console.error('Token decode error:', e);
+        return null;
+    }
+}
+
 // 인증 확인
 function checkAuth() {
     const token = localStorage.getItem('token');
@@ -8,8 +20,28 @@ function checkAuth() {
     
     if (!token || !user) {
         // 로그인되지 않은 경우 로그인 페이지로 리다이렉트
+        console.log('No token or user, redirecting to login');
         window.location.href = '/admin/index.html';
         return false;
+    }
+    
+    // 토큰 만료 확인
+    try {
+        const tokenData = decodeToken(token);
+        if (tokenData && tokenData.exp) {
+            const now = Date.now();
+            if (now > tokenData.exp) {
+                console.log('Token expired, redirecting to login');
+                alert('세션이 만료되었습니다. 다시 로그인해주세요.');
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+                window.location.href = '/admin/index.html';
+                return false;
+            }
+        }
+    } catch (e) {
+        console.error('Token validation error:', e);
+        // 토큰 검증 실패 시에도 계속 진행 (하위 호환성)
     }
     
     // 사용자 정보 표시
@@ -28,10 +60,15 @@ function checkAuth() {
 
 // 로그아웃
 function logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    window.location.href = '/admin/index.html';
+}
+
+// 확인 후 로그아웃
+function confirmLogout() {
     if (confirm('정말 로그아웃 하시겠습니까?')) {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-        window.location.href = '/admin/index.html';
+        logout();
     }
 }
 
