@@ -328,7 +328,7 @@
                 });
 
                 // no-cors 모드에서는 응답을 읽을 수 없으므로 성공으로 간주
-                showAlert('success', '접수 완료', '문의가 정상적으로 접수되었습니다.\n빠른 시일 내에 답변드리겠습니다.');
+                showAlert('success', '접수 완료', '문의가 정상적으로 접수되었습니다.\n빠른 시일 내에 답변드리겠습니다.\n\n3초 후 메인 페이지로 이동합니다.');
                 
                 // 폼 초기화
                 document.getElementById('inquiryForm').reset();
@@ -353,6 +353,11 @@
             if (type === 'success') {
                 icon.innerHTML = '<i class="fas fa-check-circle text-6xl text-green-500"></i>';
                 titleEl.className = 'text-xl font-bold text-center mb-3 text-green-600';
+                
+                // 성공 시 3초 후 메인 페이지로 이동
+                setTimeout(() => {
+                    window.location.href = '/';
+                }, 3000);
             } else {
                 icon.innerHTML = '<i class="fas fa-exclamation-circle text-6xl text-red-500"></i>';
                 titleEl.className = 'text-xl font-bold text-center mb-3 text-red-600';
@@ -365,7 +370,13 @@
 
         // 모달 닫기
         function closeModal() {
-            document.getElementById('alertModal').classList.add('hidden');
+            const modal = document.getElementById('alertModal');
+            // 성공 메시지 모달을 닫으면 즉시 메인 페이지로 이동
+            if (modal.querySelector('.text-green-600')) {
+                window.location.href = '/';
+            } else {
+                modal.classList.add('hidden');
+            }
         }
 
         // 전화번호 자동 하이픈 추가
