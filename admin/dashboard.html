@@ -168,10 +168,14 @@
 
         // 로그아웃
         function logout() {
+            localStorage.removeItem('adminToken');
+            localStorage.removeItem('adminUser');
+            window.location.href = '/admin/index.html';
+        }
+
+        function confirmLogout() {
             if (confirm('로그아웃 하시겠습니까?')) {
-                localStorage.removeItem('adminToken');
-                localStorage.removeItem('adminUser');
-                window.location.href = '/admin/index.html';
+                logout();
             }
         }
 
@@ -188,6 +192,36 @@
                 if (noticeData.success) {
                     document.getElementById('noticeCount').textContent = 
                         noticeData.data.pagination.total;
+                }
+
+                // 자료실 수
+                const downloadRes = await fetch('/api/download?limit=1', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const downloadData = await downloadRes.json();
+                if (downloadData.success) {
+                    document.getElementById('downloadCount').textContent = 
+                        downloadData.data.pagination.total;
+                }
+
+                // FAQ 수
+                const faqRes = await fetch('/api/faq?limit=1', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const faqData = await faqRes.json();
+                if (faqData.success) {
+                    document.getElementById('faqCount').textContent = 
+                        faqData.data.pagination.total;
+                }
+
+                // 갤러리 수
+                const galleryRes = await fetch('/api/gallery?limit=1', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const galleryData = await galleryRes.json();
+                if (galleryData.success) {
+                    document.getElementById('galleryCount').textContent = 
+                        galleryData.data.pagination.total;
                 }
 
                 // 최근 공지사항 표시
