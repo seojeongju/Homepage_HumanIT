@@ -1,0 +1,217 @@
+// 갤러리 상세/수정/삭제 API
+// GET/PUT/DELETE /api/gallery/:id
+
+interface Env {
+  DB: D1Database;
+}
+
+// 갤러리 상세 조회
+export async function onRequestGet(context) {
+  const { params, env } = context;
+  
+  if (!env.DB) {
+    return new Response(JSON.stringify({
+      success: false,
+      message: 'Database binding is not configured.',
+      error: 'DB_BINDING_MISSING'
+    }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
+  
+  const db = env.DB as D1Database;
+  const id = params.id;
+
+  try {
+    // 갤러리 조회
+    const result = await db.prepare(
+      'SELECT id, title, description, image_url, thumbnail_url, order_num, status, created_at, updated_at FROM galleries WHERE id = ?'
+    ).bind(id).first();
+
+    if (!result) {
+      return new Response(JSON.stringify({
+        success: false,
+        message: '갤러리를 찾을 수 없습니다.'
+      }), {
+        status: 404,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+
+    return new Response(JSON.stringify({
+      success: true,
+      data: result
+    }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' }
+    });
+
+  } catch (error) {
+    console.error('Gallery detail error:', error);
+    return new Response(JSON.stringify({
+      success: false,
+      message: '갤러리 조회 중 오류가 발생했습니다.'
+    }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
+}
+
+// 갤러리 수정
+export async function onRequestPut(context) {
+  const { params, request, env } = context;
+  
+  if (!env.DB) {
+    return new Response(JSON.stringify({
+      success: false,
+      message: 'Database binding is not configured.',
+      error: 'DB_BINDING_MISSING'
+    }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
+  
+  const db = env.DB as D1Database;
+  const id = params.id;
+
+  try {
+    // 인증 확인
+    const authHeader = request.headers.get('Authorization');
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      return new Response(JSON.stringify({
+        success: false,
+        message: '인증이 필요합니다.'
+      }), {
+        status: 401,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+
+    const body = await request.json();
+    const { title, description, image_url, thumbnail_url, order_num, status } = body;
+
+    if (!title || !image_url) {
+      return new Response(JSON.stringify({
+        success: false,
+        message: '제목과 이미지 URL은 필수입니다.'
+      }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+
+    // 갤러리 수정
+    const result = await db.prepare(
+      `UPDATE galleries 
+       SET title = ?, description = ?, image_url = ?, thumbnail_url = ?, order_num = ?, status = ?, updated_at = CURRENT_TIMESTAMP 
+       WHERE id = ?
+       RETURNING id, title, description, image_url, thumbnail_url, order_num, status, created_at, updated_at`
+    ).bind(
+      title, 
+      description || '', 
+      image_url, 
+      thumbnail_url || image_url, 
+      order_num || 0, 
+      status || 'published', 
+      id
+    ).first();
+
+    if (!result) {
+      return new Response(JSON.stringify({
+        success: false,
+        message: '갤러리를 찾을 수 없습니다.'
+      }), {
+        status: 404,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+
+    return new Response(JSON.stringify({
+      success: true,
+      message: '갤러리가 수정되었습니다.',
+      data: result
+    }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' }
+    });
+
+  } catch (error) {
+    console.error('Gallery update error:', error);
+    return new Response(JSON.stringify({
+      success: false,
+      message: '갤러리 수정 중 오류가 발생했습니다.'
+    }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
+}
+
+// 갤러리 삭제
+export async function onRequestDelete(context) {
+  const { params, request, env } = context;
+  
+  if (!env.DB) {
+    return new Response(JSON.stringify({
+      success: false,
+      message: 'Database binding is not configured.',
+      error: 'DB_BINDING_MISSING'
+    }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
+  
+  const db = env.DB as D1Database;
+  const id = params.id;
+
+  try {
+    // 인증 확인
+    const authHeader = request.headers.get('Authorization');
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      return new Response(JSON.stringify({
+        success: false,
+        message: '인증이 필요합니다.'
+      }), {
+        status: 401,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+
+    // 갤러리 삭제
+    const result = await db.prepare(
+      'DELETE FROM galleries WHERE id = ? RETURNING id'
+    ).bind(id).first();
+
+    if (!result) {
+      return new Response(JSON.stringify({
+        success: false,
+        message: '갤러리를 찾을 수 없습니다.'
+      }), {
+        status: 404,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+
+    return new Response(JSON.stringify({
+      success: true,
+      message: '갤러리가 삭제되었습니다.'
+    }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' }
+    });
+
+  } catch (error) {
+    console.error('Gallery delete error:', error);
+    return new Response(JSON.stringify({
+      success: false,
+      message: '갤러리 삭제 중 오류가 발생했습니다.'
+    }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
+}
