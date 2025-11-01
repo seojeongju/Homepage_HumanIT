@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>관리자 대시보드 - (주)휴먼아이티</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+</head>
+<body class="bg-gray-100">
+    <div class="flex h-screen">
+        <!-- 사이드바 -->
+        <aside class="w-64 bg-gradient-to-b from-blue-600 to-purple-600 text-white">
+            <div class="p-6">
+                <div class="flex items-center space-x-3 mb-8">
+                    <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+                        <i class="fas fa-user-shield text-blue-600"></i>
+                    </div>
+                    <div>
+                        <h2 class="font-bold">관리자</h2>
+                        <p class="text-xs text-blue-200" id="adminUsername">-</p>
+                    </div>
+                </div>
+
+                <nav class="space-y-2">
+                    <a href="/admin/dashboard.html" class="flex items-center space-x-3 px-4 py-3 rounded-lg bg-white/20 hover:bg-white/30 transition">
+                        <i class="fas fa-tachometer-alt w-5"></i>
+                        <span>대시보드</span>
+                    </a>
+                    <a href="/admin/notice.html" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-white/10 transition">
+                        <i class="fas fa-bullhorn w-5"></i>
+                        <span>공지사항</span>
+                    </a>
+                    <a href="/admin/download.html" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-white/10 transition">
+                        <i class="fas fa-download w-5"></i>
+                        <span>자료실</span>
+                    </a>
+                    <a href="/admin/faq.html" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-white/10 transition">
+                        <i class="fas fa-question-circle w-5"></i>
+                        <span>FAQ</span>
+                    </a>
+                    <a href="/admin/gallery.html" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-white/10 transition">
+                        <i class="fas fa-images w-5"></i>
+                        <span>갤러리</span>
+                    </a>
+                </nav>
+
+                <div class="mt-8 pt-8 border-t border-white/20">
+                    <button onclick="logout()" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-red-500/20 transition w-full text-left">
+                        <i class="fas fa-sign-out-alt w-5"></i>
+                        <span>로그아웃</span>
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- 메인 컨텐츠 -->
+        <main class="flex-1 overflow-y-auto">
+            <!-- 헤더 -->
+            <header class="bg-white shadow-sm">
+                <div class="px-8 py-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h1 class="text-2xl font-bold text-gray-900">대시보드</h1>
+                            <p class="text-gray-500 mt-1">휴먼아이티 관리자 시스템</p>
+                        </div>
+                        <a href="/" target="_blank" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            웹사이트 보기
+                        </a>
+                    </div>
+                </div>
+            </header>
+
+            <!-- 통계 카드 -->
+            <div class="p-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <!-- 공지사항 -->
+                    <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-blue-500">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500 text-sm font-semibold">공지사항</p>
+                                <p class="text-3xl font-bold text-gray-900 mt-2" id="noticeCount">0</p>
+                            </div>
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-bullhorn text-blue-600 text-xl"></i>
+                            </div>
+                        </div>
+                        <a href="/admin/notice.html" class="text-blue-600 text-sm font-semibold mt-4 inline-block hover:underline">
+                            관리하기 →
+                        </a>
+                    </div>
+
+                    <!-- 자료실 -->
+                    <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-green-500">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500 text-sm font-semibold">자료실</p>
+                                <p class="text-3xl font-bold text-gray-900 mt-2" id="downloadCount">0</p>
+                            </div>
+                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-download text-green-600 text-xl"></i>
+                            </div>
+                        </div>
+                        <a href="/admin/download.html" class="text-green-600 text-sm font-semibold mt-4 inline-block hover:underline">
+                            관리하기 →
+                        </a>
+                    </div>
+
+                    <!-- FAQ -->
+                    <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-purple-500">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500 text-sm font-semibold">FAQ</p>
+                                <p class="text-3xl font-bold text-gray-900 mt-2" id="faqCount">0</p>
+                            </div>
+                            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-question-circle text-purple-600 text-xl"></i>
+                            </div>
+                        </div>
+                        <a href="/admin/faq.html" class="text-purple-600 text-sm font-semibold mt-4 inline-block hover:underline">
+                            관리하기 →
+                        </a>
+                    </div>
+
+                    <!-- 갤러리 -->
+                    <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-pink-500">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500 text-sm font-semibold">갤러리</p>
+                                <p class="text-3xl font-bold text-gray-900 mt-2" id="galleryCount">0</p>
+                            </div>
+                            <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-images text-pink-600 text-xl"></i>
+                            </div>
+                        </div>
+                        <a href="/admin/gallery.html" class="text-pink-600 text-sm font-semibold mt-4 inline-block hover:underline">
+                            관리하기 →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 최근 활동 -->
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <h3 class="text-lg font-bold text-gray-900 mb-4">
+                        <i class="fas fa-clock text-gray-400 mr-2"></i>
+                        최근 공지사항
+                    </h3>
+                    <div id="recentNotices" class="divide-y">
+                        <div class="text-center py-8 text-gray-400">
+                            <i class="fas fa-spinner fa-spin text-2xl mb-2"></i>
+                            <p>로딩 중...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/admin/js/auth.js"></script>
+    <script>
+        // 인증 확인
+        checkAuth();
+
+        // 사용자 정보 표시
+        const user = JSON.parse(localStorage.getItem('adminUser') || '{}');
+        document.getElementById('adminUsername').textContent = user.username || '-';
+
+        // 로그아웃
+        function logout() {
+            if (confirm('로그아웃 하시겠습니까?')) {
+                localStorage.removeItem('adminToken');
+                localStorage.removeItem('adminUser');
+                window.location.href = '/admin/index.html';
+            }
+        }
+
+        // 통계 데이터 로드
+        async function loadStats() {
+            const token = localStorage.getItem('adminToken');
+
+            try {
+                // 공지사항 수
+                const noticeRes = await fetch('/api/notice?limit=1', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const noticeData = await noticeRes.json();
+                if (noticeData.success) {
+                    document.getElementById('noticeCount').textContent = 
+                        noticeData.data.pagination.total;
+                }
+
+                // 최근 공지사항 표시
+                const recentRes = await fetch('/api/notice?limit=5', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const recentData = await recentRes.json();
+                if (recentData.success) {
+                    displayRecentNotices(recentData.data.notices);
+                }
+
+            } catch (error) {
+                console.error('Stats load error:', error);
+            }
+        }
+
+        // 최근 공지사항 표시
+        function displayRecentNotices(notices) {
+            const container = document.getElementById('recentNotices');
+            
+            if (notices.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-8 text-gray-400">
+                        <i class="fas fa-inbox text-2xl mb-2"></i>
+                        <p>등록된 공지사항이 없습니다.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = notices.map(notice => `
+                <div class="py-4 flex items-center justify-between hover:bg-gray-50 px-4 -mx-4 rounded-lg transition">
+                    <div class="flex-1">
+                        <h4 class="font-semibold text-gray-900">${escapeHtml(notice.title)}</h4>
+                        <p class="text-sm text-gray-500 mt-1">
+                            <i class="fas fa-eye mr-1"></i>
+                            조회 ${notice.views}회 · ${formatDate(notice.created_at)}
+                        </p>
+                    </div>
+                    <a href="/admin/notice.html?id=${notice.id}" 
+                       class="px-4 py-2 text-blue-600 hover:bg-blue-50 rounded-lg transition text-sm font-semibold">
+                        수정
+                    </a>
+                </div>
+            `).join('');
+        }
+
+        // HTML 이스케이프
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // 날짜 포맷
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const now = new Date();
+            const diff = now - date;
+            const minutes = Math.floor(diff / 60000);
+            const hours = Math.floor(diff / 3600000);
+            const days = Math.floor(diff / 86400000);
+
+            if (minutes < 1) return '방금 전';
+            if (minutes < 60) return `${minutes}분 전`;
+            if (hours < 24) return `${hours}시간 전`;
+            if (days < 7) return `${days}일 전`;
+            
+            return date.toLocaleDateString('ko-KR');
+        }
+
+        // 페이지 로드 시 실행
+        loadStats();
+    </script>
+</body>
+</html>
