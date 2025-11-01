@@ -55,53 +55,368 @@
         </aside>
 
         <!-- 메인 컨텐츠 -->
-        <main class="flex-1 overflow-y-auto flex items-center justify-center">
-            <div class="text-center">
-                <div class="inline-flex items-center justify-center w-24 h-24 bg-purple-100 rounded-full mb-6">
-                    <i class="fas fa-question-circle text-5xl text-purple-600"></i>
-                </div>
-                <h1 class="text-3xl font-bold text-gray-900 mb-4">FAQ 관리</h1>
-                <p class="text-xl text-gray-600 mb-8">현재 개발 중입니다</p>
-                <div class="space-y-4 text-gray-500">
-                    <div class="flex items-center justify-center space-x-2">
-                        <i class="fas fa-check-circle text-green-500"></i>
-                        <span>카테고리별 FAQ 분류</span>
-                    </div>
-                    <div class="flex items-center justify-center space-x-2">
-                        <i class="fas fa-check-circle text-green-500"></i>
-                        <span>순서 변경 기능</span>
-                    </div>
-                    <div class="flex items-center justify-center space-x-2">
-                        <i class="fas fa-check-circle text-green-500"></i>
-                        <span>검색 기능</span>
+        <main class="flex-1 overflow-y-auto">
+            <!-- 헤더 -->
+            <header class="bg-white shadow-sm">
+                <div class="px-8 py-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h1 class="text-2xl font-bold text-gray-900">FAQ 관리</h1>
+                            <p class="text-gray-500 mt-1">자주 묻는 질문을 추가, 수정, 삭제할 수 있습니다</p>
+                        </div>
+                        <button onclick="showCreateModal()" class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition shadow-md hover:shadow-lg">
+                            <i class="fas fa-plus mr-2"></i>
+                            새 FAQ 등록
+                        </button>
                     </div>
                 </div>
-                <div class="mt-8">
-                    <a href="/admin/dashboard.html" class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition shadow-md hover:shadow-lg inline-flex items-center">
-                        <i class="fas fa-arrow-left mr-2"></i>
-                        대시보드로 돌아가기
-                    </a>
+            </header>
+
+            <!-- 필터 -->
+            <div class="p-8 pb-4">
+                <div class="bg-white rounded-lg shadow-sm p-4 flex items-center space-x-4">
+                    <label class="text-sm font-semibold text-gray-700">카테고리:</label>
+                    <select id="categoryFilter" onchange="loadFAQs()" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <option value="">전체</option>
+                        <option value="general">일반</option>
+                        <option value="product">제품</option>
+                        <option value="service">서비스</option>
+                        <option value="technical">기술지원</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- FAQ 목록 -->
+            <div class="px-8 pb-8">
+                <div class="bg-white rounded-xl shadow-md">
+                    <div class="p-6">
+                        <div id="faqList" class="space-y-4">
+                            <div class="text-center py-12">
+                                <i class="fas fa-spinner fa-spin text-3xl text-gray-400 mb-4"></i>
+                                <p class="text-gray-500">로딩 중...</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </main>
     </div>
 
-    <script src="/admin/js/auth.js"></script>
+    <!-- 생성/수정 모달 -->
+    <div id="faqModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-bold text-gray-900" id="modalTitle">새 FAQ 등록</h2>
+                    <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600">
+                        <i class="fas fa-times text-2xl"></i>
+                    </button>
+                </div>
+
+                <form id="faqForm" class="space-y-6">
+                    <input type="hidden" id="faqId" />
+                    
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            질문 <span class="text-red-500">*</span>
+                        </label>
+                        <input type="text" id="question" required
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="자주 묻는 질문을 입력하세요" />
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            답변 <span class="text-red-500">*</span>
+                        </label>
+                        <textarea id="answer" rows="6" required
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="답변을 입력하세요"></textarea>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">카테고리</label>
+                            <select id="category"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option value="general">일반</option>
+                                <option value="product">제품</option>
+                                <option value="service">서비스</option>
+                                <option value="technical">기술지원</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                순서
+                                <span class="text-xs text-gray-500">(낮은 숫자가 먼저 표시)</span>
+                            </label>
+                            <input type="number" id="orderNum" value="0" min="0"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">상태</label>
+                        <select id="status"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="published">공개</option>
+                            <option value="draft">비공개</option>
+                        </select>
+                    </div>
+
+                    <div class="flex space-x-4 pt-4">
+                        <button type="submit" class="flex-1 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-semibold">
+                            <i class="fas fa-save mr-2"></i>
+                            저장
+                        </button>
+                        <button type="button" onclick="closeModal()" class="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition font-semibold">
+                            취소
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="/admin/js/common.js"></script>
     <script>
-        // 인증 확인
-        checkAuth();
+        let currentPage = 1;
+        let currentEditId = null;
 
-        // 사용자 정보 표시
-        const user = JSON.parse(localStorage.getItem('adminUser') || '{}');
-        document.getElementById('adminUsername').textContent = user.username || '-';
+        // 카테고리 한글 변환
+        const categoryLabels = {
+            general: '일반',
+            product: '제품',
+            service: '서비스',
+            technical: '기술지원'
+        };
 
-        // 로그아웃
-        function logout() {
-            if (confirm('로그아웃 하시겠습니까?')) {
-                localStorage.removeItem('adminToken');
-                localStorage.removeItem('adminUser');
-                window.location.href = '/admin/index.html';
+        // 페이지 로드 시
+        document.addEventListener('DOMContentLoaded', () => {
+            checkAuth();
+            loadFAQs();
+            
+            document.getElementById('faqForm').addEventListener('submit', handleSubmit);
+        });
+
+        // FAQ 목록 로드
+        async function loadFAQs(page = 1) {
+            try {
+                const categoryFilter = document.getElementById('categoryFilter').value;
+                let url = `/api/faq?page=${page}&limit=50`;
+                
+                if (categoryFilter) {
+                    url += `&category=${categoryFilter}`;
+                }
+
+                const response = await fetch(url);
+                const result = await response.json();
+
+                if (!result.success) {
+                    throw new Error(result.message);
+                }
+
+                const { faqs, pagination } = result.data;
+                currentPage = page;
+
+                renderFAQList(faqs, pagination);
+            } catch (error) {
+                console.error('FAQ 목록 로드 실패:', error);
+                showError('FAQ 목록을 불러오는데 실패했습니다.');
             }
+        }
+
+        // FAQ 목록 렌더링
+        function renderFAQList(faqs, pagination) {
+            const listEl = document.getElementById('faqList');
+
+            if (!faqs || faqs.length === 0) {
+                listEl.innerHTML = `
+                    <div class="text-center py-12">
+                        <i class="fas fa-question-circle text-5xl text-gray-300 mb-4"></i>
+                        <p class="text-gray-500">등록된 FAQ가 없습니다</p>
+                        <button onclick="showCreateModal()" class="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                            첫 FAQ 등록하기
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            listEl.innerHTML = faqs.map(faq => `
+                <div class="border border-gray-200 rounded-lg hover:shadow-md transition">
+                    <div class="p-6">
+                        <div class="flex items-start justify-between mb-3">
+                            <div class="flex-1">
+                                <div class="flex items-center space-x-3 mb-2">
+                                    <span class="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-semibold rounded-full">
+                                        ${categoryLabels[faq.category] || faq.category}
+                                    </span>
+                                    <span class="px-3 py-1 bg-gray-100 text-gray-600 text-xs font-semibold rounded-full">
+                                        순서: ${faq.order_num}
+                                    </span>
+                                    ${faq.status === 'draft' ? '<span class="px-3 py-1 bg-yellow-100 text-yellow-700 text-xs font-semibold rounded-full">비공개</span>' : ''}
+                                </div>
+                                <h3 class="text-lg font-bold text-gray-900 mb-2">
+                                    <i class="fas fa-question-circle text-blue-500 mr-2"></i>
+                                    ${escapeHtml(faq.question)}
+                                </h3>
+                                <p class="text-gray-600 whitespace-pre-wrap">${escapeHtml(faq.answer)}</p>
+                            </div>
+                            <div class="flex items-center space-x-2 ml-4">
+                                <button onclick="editFAQ(${faq.id})" 
+                                    class="px-4 py-2 text-blue-600 hover:bg-blue-50 rounded-lg transition">
+                                    <i class="fas fa-edit mr-1"></i>수정
+                                </button>
+                                <button onclick="deleteFAQ(${faq.id})" 
+                                    class="px-4 py-2 text-red-600 hover:bg-red-50 rounded-lg transition">
+                                    <i class="fas fa-trash mr-1"></i>삭제
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 생성 모달 표시
+        function showCreateModal() {
+            currentEditId = null;
+            document.getElementById('modalTitle').textContent = '새 FAQ 등록';
+            document.getElementById('faqForm').reset();
+            document.getElementById('faqId').value = '';
+            document.getElementById('orderNum').value = '0';
+            document.getElementById('faqModal').classList.remove('hidden');
+        }
+
+        // 수정 모달 표시
+        async function editFAQ(id) {
+            try {
+                const response = await fetch(`/api/faq/${id}`);
+                const result = await response.json();
+
+                if (!result.success) {
+                    throw new Error(result.message);
+                }
+
+                const faq = result.data;
+                currentEditId = id;
+
+                document.getElementById('modalTitle').textContent = 'FAQ 수정';
+                document.getElementById('faqId').value = id;
+                document.getElementById('question').value = faq.question;
+                document.getElementById('answer').value = faq.answer;
+                document.getElementById('category').value = faq.category || 'general';
+                document.getElementById('orderNum').value = faq.order_num || 0;
+                document.getElementById('status').value = faq.status || 'published';
+
+                document.getElementById('faqModal').classList.remove('hidden');
+            } catch (error) {
+                console.error('FAQ 로드 실패:', error);
+                showError('FAQ 정보를 불러오는데 실패했습니다.');
+            }
+        }
+
+        // 모달 닫기
+        function closeModal() {
+            document.getElementById('faqModal').classList.add('hidden');
+            currentEditId = null;
+        }
+
+        // 폼 제출 처리
+        async function handleSubmit(e) {
+            e.preventDefault();
+
+            const question = document.getElementById('question').value.trim();
+            const answer = document.getElementById('answer').value.trim();
+            const category = document.getElementById('category').value;
+            const orderNum = parseInt(document.getElementById('orderNum').value) || 0;
+            const status = document.getElementById('status').value;
+
+            if (!question || !answer) {
+                showError('질문과 답변은 필수입니다.');
+                return;
+            }
+
+            try {
+                const token = localStorage.getItem('token');
+                const method = currentEditId ? 'PUT' : 'POST';
+                const url = currentEditId ? `/api/faq/${currentEditId}` : '/api/faq';
+
+                const response = await fetch(url, {
+                    method,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        question,
+                        answer,
+                        category,
+                        order_num: orderNum,
+                        status
+                    })
+                });
+
+                const result = await response.json();
+
+                if (!result.success) {
+                    throw new Error(result.message);
+                }
+
+                showSuccess(currentEditId ? 'FAQ가 수정되었습니다.' : 'FAQ가 등록되었습니다.');
+                closeModal();
+                loadFAQs(currentPage);
+            } catch (error) {
+                console.error('저장 실패:', error);
+                showError(error.message || '저장에 실패했습니다.');
+            }
+        }
+
+        // FAQ 삭제
+        async function deleteFAQ(id) {
+            if (!confirm('정말 이 FAQ를 삭제하시겠습니까?')) {
+                return;
+            }
+
+            try {
+                const token = localStorage.getItem('token');
+                const response = await fetch(`/api/faq/${id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                const result = await response.json();
+
+                if (!result.success) {
+                    throw new Error(result.message);
+                }
+
+                showSuccess('FAQ가 삭제되었습니다.');
+                loadFAQs(currentPage);
+            } catch (error) {
+                console.error('삭제 실패:', error);
+                showError('삭제에 실패했습니다.');
+            }
+        }
+
+        // HTML 이스케이프
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // 에러 메시지 표시
+        function showError(message) {
+            alert('❌ ' + message);
+        }
+
+        // 성공 메시지 표시
+        function showSuccess(message) {
+            alert('✅ ' + message);
         }
     </script>
 </body>
