@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>회사개요 - (주)휴먼아이티</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+    <link href="/static/style.css" rel="stylesheet"/>
+</head>
+<body class="bg-gray-50">
+    <div>
+        <!-- Header (동일한 헤더 사용) -->
+        <header class="bg-white shadow-sm sticky top-0 z-50">
+            <div class="container mx-auto px-4">
+                <div class="flex items-center justify-between h-20">
+                    <a href="/" class="flex items-center space-x-3">
+                        <img src="https://page.gensparksite.com/v1/base64_upload/a083f176d0e758352a6c24af9ebea7fa" alt="휴먼아이티 로고" class="h-12"/>
+                    </a>
+                    <nav class="hidden md:flex items-center space-x-8">
+                        <a href="/" class="text-gray-700 hover:text-blue-600 font-medium transition">HOME</a>
+                        <div class="relative group">
+                            <button class="text-blue-600 hover:text-blue-600 font-medium transition flex items-center">
+                                회사소개
+                                <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                            </button>
+                            <div class="absolute top-full left-0 mt-2 w-40 bg-white shadow-lg rounded-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+                                <a href="/about" class="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">회사현황</a>
+                                <a href="/about/history.html" class="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">회사연혁</a>
+                                <a href="/about/location.html" class="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">오시는길</a>
+                            </div>
+                        </div>
+                        <div class="relative group">
+                            <button class="text-gray-700 hover:text-blue-600 font-medium transition flex items-center">
+                                제품소개
+                                <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                            </button>
+                            <div class="absolute top-full left-0 mt-2 w-48 bg-white shadow-lg rounded-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+                                <a href="/products/wooridoori.html" class="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">우리두리 돌봄인형</a>
+                                <a href="/products/kiosk.html" class="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">배리어프리 키오스크</a>
+                            </div>
+                        </div>
+                        <a href="/contact" class="text-gray-700 hover:text-blue-600 font-medium transition">Contact us</a>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <!-- Page Header -->
+        <section class="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16">
+            <div class="container mx-auto px-4">
+                <h1 class="text-4xl font-bold mb-4">회사현황</h1>
+                <p class="text-xl text-blue-100">Company Overview</p>
+            </div>
+        </section>
+
+        <!-- Main Content -->
+        <main class="py-16">
+            <div class="container mx-auto px-4">
+                <!-- 회사 소개 -->
+                <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-bold mb-4 text-gray-800">IT(AX)와 하나된 휴머니즘을 실현시키는 기업</h2>
+                        <p class="text-xl text-blue-600 font-semibold">Inclusive Solutions, Empowered Lives</p>
+                        <p class="text-lg text-gray-600 mt-2">Smart Tech for All Abilities</p>
+                    </div>
+
+                    <!-- 회사 정보 테이블 -->
+                    <div class="max-w-4xl mx-auto">
+                        <h3 class="text-2xl font-bold mb-6 text-gray-800 border-b-2 border-blue-600 pb-2">회사현황</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="bg-gray-50 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-building text-blue-600 text-2xl mr-3"></i>
+                                    <h4 class="text-lg font-bold text-gray-800">기업명</h4>
+                                </div>
+                                <p class="text-gray-700 ml-9">주식회사 휴먼아이티</p>
+                            </div>
+
+                            <div class="bg-gray-50 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-user-tie text-blue-600 text-2xl mr-3"></i>
+                                    <h4 class="text-lg font-bold text-gray-800">대표이사</h4>
+                                </div>
+                                <p class="text-gray-700 ml-9">윤 광 식</p>
+                            </div>
+
+                            <div class="bg-gray-50 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-briefcase text-blue-600 text-2xl mr-3"></i>
+                                    <h4 class="text-lg font-bold text-gray-800">주요사업</h4>
+                                </div>
+                                <p class="text-gray-700 ml-9">장애인 보조공학기기</p>
+                            </div>
+
+                            <div class="bg-gray-50 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-calendar-alt text-blue-600 text-2xl mr-3"></i>
+                                    <h4 class="text-lg font-bold text-gray-800">설립일</h4>
+                                </div>
+                                <p class="text-gray-700 ml-9">2022년 04월 05일</p>
+                            </div>
+
+                            <div class="bg-gray-50 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-coins text-blue-600 text-2xl mr-3"></i>
+                                    <h4 class="text-lg font-bold text-gray-800">자본금</h4>
+                                </div>
+                                <p class="text-gray-700 ml-9">100,000,000원 (주당 100원)</p>
+                            </div>
+
+                            <div class="bg-gray-50 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-industry text-blue-600 text-2xl mr-3"></i>
+                                    <h4 class="text-lg font-bold text-gray-800">업태</h4>
+                                </div>
+                                <p class="text-gray-700 ml-9">제조업, 장애인·노인 보조공학기기 제조</p>
+                            </div>
+
+                            <div class="bg-gray-50 p-6 rounded-lg md:col-span-2">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-map-marker-alt text-blue-600 text-2xl mr-3"></i>
+                                    <h4 class="text-lg font-bold text-gray-800">소재지</h4>
+                                </div>
+                                <p class="text-gray-700 ml-9">경북 구미시 고아읍 들성로7길 5-36</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 비전 및 미션 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                    <div class="bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-lg shadow-lg p-8">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-eye text-5xl mb-4"></i>
+                            <h3 class="text-2xl font-bold mb-4">비전</h3>
+                        </div>
+                        <p class="text-lg leading-relaxed">
+                            모든 사람이 기술의 혜택을 누릴 수 있도록 장애인과 고령자를 위한 포용적 기술 솔루션을 제공하는 글로벌 리더
+                        </p>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-purple-500 to-purple-600 text-white rounded-lg shadow-lg p-8">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-bullseye text-5xl mb-4"></i>
+                            <h3 class="text-2xl font-bold mb-4">미션</h3>
+                        </div>
+                        <p class="text-lg leading-relaxed">
+                            IoT, AI 기술을 활용하여 장애인과 고령자의 일상생활을 지원하고 삶의 질을 향상시키는 혁신적인 보조공학기기 개발
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 인증 및 수상 -->
+                <div class="bg-white rounded-lg shadow-lg p-8">
+                    <h3 class="text-2xl font-bold mb-6 text-gray-800 text-center">인증 및 지정현황</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                        <div class="text-center p-4 bg-blue-50 rounded-lg">
+                            <i class="fas fa-certificate text-blue-600 text-3xl mb-2"></i>
+                            <p class="font-semibold text-sm">벤처기업</p>
+                            <p class="text-xs text-gray-600">혁신성장형</p>
+                        </div>
+                        <div class="text-center p-4 bg-purple-50 rounded-lg">
+                            <i class="fas fa-flask text-purple-600 text-3xl mb-2"></i>
+                            <p class="font-semibold text-sm">기업부설연구소</p>
+                            <p class="text-xs text-gray-600">2024.12</p>
+                        </div>
+                        <div class="text-center p-4 bg-green-50 rounded-lg">
+                            <i class="fas fa-lightbulb text-green-600 text-3xl mb-2"></i>
+                            <p class="font-semibold text-sm">지식재산경영인증</p>
+                            <p class="text-xs text-gray-600">특허청</p>
+                        </div>
+                        <div class="text-center p-4 bg-orange-50 rounded-lg">
+                            <i class="fas fa-database text-orange-600 text-3xl mb-2"></i>
+                            <p class="font-semibold text-sm">AI가공 공급기업</p>
+                            <p class="text-xs text-gray-600">과기정통부</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer (동일한 푸터) -->
+        <footer class="bg-gray-800 text-white py-12">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div>
+                        <h3 class="text-xl font-bold mb-4">(주)휴먼아이티</h3>
+                        <p class="text-gray-400 mb-4">
+                            최고의 품질과 기술력으로<br/>고객의 성공을 함께합니다.
+                        </p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold mb-4">Contact Info</h4>
+                        <div class="space-y-2 text-gray-400">
+                            <p><i class="fas fa-map-marker-alt mr-2"></i> 경북 구미시 고아읍 들성로7길 5-36</p>
+                            <p><i class="fas fa-phone mr-2"></i> 054-XXX-XXXX</p>
+                            <p><i class="fas fa-envelope mr-2"></i> contact@humanit.co.kr</p>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-bold mb-4">Quick Links</h4>
+                        <div class="space-y-2">
+                            <a href="/about" class="block text-gray-400 hover:text-white transition">회사소개</a>
+                            <a href="/products" class="block text-gray-400 hover:text-white transition">제품소개</a>
+                            <a href="/contact" class="block text-gray-400 hover:text-white transition">문의하기</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                    <p>© 2024 (주)휴먼아이티. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
