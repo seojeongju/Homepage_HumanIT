@@ -55,53 +55,346 @@
         </aside>
 
         <!-- 메인 컨텐츠 -->
-        <main class="flex-1 overflow-y-auto flex items-center justify-center">
-            <div class="text-center">
-                <div class="inline-flex items-center justify-center w-24 h-24 bg-blue-100 rounded-full mb-6">
-                    <i class="fas fa-download text-5xl text-blue-600"></i>
-                </div>
-                <h1 class="text-3xl font-bold text-gray-900 mb-4">자료실 관리</h1>
-                <p class="text-xl text-gray-600 mb-8">현재 개발 중입니다</p>
-                <div class="space-y-4 text-gray-500">
-                    <div class="flex items-center justify-center space-x-2">
-                        <i class="fas fa-check-circle text-green-500"></i>
-                        <span>파일 업로드 기능 (Cloudflare R2)</span>
-                    </div>
-                    <div class="flex items-center justify-center space-x-2">
-                        <i class="fas fa-check-circle text-green-500"></i>
-                        <span>다운로드 카운트 관리</span>
-                    </div>
-                    <div class="flex items-center justify-center space-x-2">
-                        <i class="fas fa-check-circle text-green-500"></i>
-                        <span>파일 형식별 아이콘 표시</span>
+        <main class="flex-1 overflow-y-auto">
+            <!-- 헤더 -->
+            <header class="bg-white shadow-sm">
+                <div class="px-8 py-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h1 class="text-2xl font-bold text-gray-900">자료실 관리</h1>
+                            <p class="text-gray-500 mt-1">다운로드 자료를 추가, 수정, 삭제할 수 있습니다</p>
+                        </div>
+                        <button onclick="showCreateModal()" class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition shadow-md hover:shadow-lg">
+                            <i class="fas fa-plus mr-2"></i>
+                            새 자료 등록
+                        </button>
                     </div>
                 </div>
-                <div class="mt-8">
-                    <a href="/admin/dashboard.html" class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition shadow-md hover:shadow-lg inline-flex items-center">
-                        <i class="fas fa-arrow-left mr-2"></i>
-                        대시보드로 돌아가기
-                    </a>
+            </header>
+
+            <!-- 자료실 목록 -->
+            <div class="p-8">
+                <div class="bg-white rounded-xl shadow-md">
+                    <div class="p-6">
+                        <div id="downloadList" class="divide-y">
+                            <div class="text-center py-12">
+                                <i class="fas fa-spinner fa-spin text-3xl text-gray-400 mb-4"></i>
+                                <p class="text-gray-500">로딩 중...</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </main>
     </div>
 
-    <script src="/admin/js/auth.js"></script>
+    <!-- 생성/수정 모달 -->
+    <div id="downloadModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-bold text-gray-900" id="modalTitle">새 자료 등록</h2>
+                    <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600">
+                        <i class="fas fa-times text-2xl"></i>
+                    </button>
+                </div>
+
+                <form id="downloadForm" class="space-y-6">
+                    <input type="hidden" id="downloadId" />
+                    
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            제목 <span class="text-red-500">*</span>
+                        </label>
+                        <input type="text" id="title" required
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="자료 제목을 입력하세요" />
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">설명</label>
+                        <textarea id="description" rows="4"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="자료에 대한 설명을 입력하세요"></textarea>
+                    </div>
+
+                    <div class="bg-gray-50 border-2 border-dashed border-gray-300 rounded-lg p-6">
+                        <div class="text-center">
+                            <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-4"></i>
+                            <p class="text-gray-600 mb-2">파일을 업로드하거나 URL을 입력하세요</p>
+                            <p class="text-sm text-gray-400 mb-4">현재는 URL 직접 입력만 지원됩니다</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            파일 URL <span class="text-red-500">*</span>
+                        </label>
+                        <input type="url" id="fileUrl" required
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="https://example.com/file.pdf" />
+                        <p class="text-xs text-gray-500 mt-1">파일이 저장된 공개 URL을 입력하세요</p>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">파일명</label>
+                            <input type="text" id="fileName"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                placeholder="예: document.pdf" />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">파일 크기</label>
+                            <input type="text" id="fileSize"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                placeholder="예: 2.5 MB" />
+                        </div>
+                    </div>
+
+                    <div class="flex space-x-4 pt-4">
+                        <button type="submit" class="flex-1 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-semibold">
+                            <i class="fas fa-save mr-2"></i>
+                            저장
+                        </button>
+                        <button type="button" onclick="closeModal()" class="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition font-semibold">
+                            취소
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="/admin/js/common.js"></script>
     <script>
-        // 인증 확인
-        checkAuth();
+        let currentPage = 1;
+        let currentEditId = null;
 
-        // 사용자 정보 표시
-        const user = JSON.parse(localStorage.getItem('adminUser') || '{}');
-        document.getElementById('adminUsername').textContent = user.username || '-';
+        // 페이지 로드 시
+        document.addEventListener('DOMContentLoaded', () => {
+            checkAuth();
+            loadDownloads();
+            
+            document.getElementById('downloadForm').addEventListener('submit', handleSubmit);
+        });
 
-        // 로그아웃
-        function logout() {
-            if (confirm('로그아웃 하시겠습니까?')) {
-                localStorage.removeItem('adminToken');
-                localStorage.removeItem('adminUser');
-                window.location.href = '/admin/index.html';
+        // 자료 목록 로드
+        async function loadDownloads(page = 1) {
+            try {
+                const response = await fetch(`/api/download?page=${page}&limit=20`);
+                const result = await response.json();
+
+                if (!result.success) {
+                    throw new Error(result.message);
+                }
+
+                const { downloads, pagination } = result.data;
+                currentPage = page;
+
+                renderDownloadList(downloads, pagination);
+            } catch (error) {
+                console.error('자료 목록 로드 실패:', error);
+                showError('자료 목록을 불러오는데 실패했습니다.');
             }
+        }
+
+        // 자료 목록 렌더링
+        function renderDownloadList(downloads, pagination) {
+            const listEl = document.getElementById('downloadList');
+
+            if (!downloads || downloads.length === 0) {
+                listEl.innerHTML = `
+                    <div class="text-center py-12">
+                        <i class="fas fa-folder-open text-5xl text-gray-300 mb-4"></i>
+                        <p class="text-gray-500">등록된 자료가 없습니다</p>
+                        <button onclick="showCreateModal()" class="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                            첫 자료 등록하기
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            listEl.innerHTML = downloads.map(download => `
+                <div class="py-6 hover:bg-gray-50 transition rounded-lg px-4 -mx-4">
+                    <div class="flex items-start justify-between">
+                        <div class="flex-1">
+                            <div class="flex items-center space-x-3 mb-2">
+                                <h3 class="text-lg font-semibold text-gray-900">${escapeHtml(download.title)}</h3>
+                                ${download.file_name ? `<span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded">${escapeHtml(download.file_name)}</span>` : ''}
+                                ${download.file_size ? `<span class="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded">${escapeHtml(download.file_size)}</span>` : ''}
+                            </div>
+                            ${download.description ? `<p class="text-gray-600 mb-3">${escapeHtml(download.description)}</p>` : ''}
+                            <div class="flex items-center space-x-4 text-sm text-gray-500">
+                                <span><i class="fas fa-download mr-1"></i>${download.downloads_count || 0} 다운로드</span>
+                                <span><i class="fas fa-clock mr-1"></i>${formatDate(download.created_at)}</span>
+                                <a href="${escapeHtml(download.file_url)}" target="_blank" class="text-blue-600 hover:text-blue-700">
+                                    <i class="fas fa-external-link-alt mr-1"></i>파일 확인
+                                </a>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2 ml-4">
+                            <button onclick="editDownload(${download.id})" 
+                                class="px-4 py-2 text-blue-600 hover:bg-blue-50 rounded-lg transition">
+                                <i class="fas fa-edit mr-1"></i>수정
+                            </button>
+                            <button onclick="deleteDownload(${download.id})" 
+                                class="px-4 py-2 text-red-600 hover:bg-red-50 rounded-lg transition">
+                                <i class="fas fa-trash mr-1"></i>삭제
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 생성 모달 표시
+        function showCreateModal() {
+            currentEditId = null;
+            document.getElementById('modalTitle').textContent = '새 자료 등록';
+            document.getElementById('downloadForm').reset();
+            document.getElementById('downloadId').value = '';
+            document.getElementById('downloadModal').classList.remove('hidden');
+        }
+
+        // 수정 모달 표시
+        async function editDownload(id) {
+            try {
+                const response = await fetch(`/api/download/${id}`);
+                const result = await response.json();
+
+                if (!result.success) {
+                    throw new Error(result.message);
+                }
+
+                const download = result.data;
+                currentEditId = id;
+
+                document.getElementById('modalTitle').textContent = '자료 수정';
+                document.getElementById('downloadId').value = id;
+                document.getElementById('title').value = download.title;
+                document.getElementById('description').value = download.description || '';
+                document.getElementById('fileUrl').value = download.file_url;
+                document.getElementById('fileName').value = download.file_name || '';
+                document.getElementById('fileSize').value = download.file_size || '';
+
+                document.getElementById('downloadModal').classList.remove('hidden');
+            } catch (error) {
+                console.error('자료 로드 실패:', error);
+                showError('자료 정보를 불러오는데 실패했습니다.');
+            }
+        }
+
+        // 모달 닫기
+        function closeModal() {
+            document.getElementById('downloadModal').classList.add('hidden');
+            currentEditId = null;
+        }
+
+        // 폼 제출 처리
+        async function handleSubmit(e) {
+            e.preventDefault();
+
+            const title = document.getElementById('title').value.trim();
+            const description = document.getElementById('description').value.trim();
+            const fileUrl = document.getElementById('fileUrl').value.trim();
+            const fileName = document.getElementById('fileName').value.trim();
+            const fileSize = document.getElementById('fileSize').value.trim();
+
+            if (!title || !fileUrl) {
+                showError('제목과 파일 URL은 필수입니다.');
+                return;
+            }
+
+            try {
+                const token = localStorage.getItem('token');
+                const method = currentEditId ? 'PUT' : 'POST';
+                const url = currentEditId ? `/api/download/${currentEditId}` : '/api/download';
+
+                const response = await fetch(url, {
+                    method,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        title,
+                        description,
+                        file_url: fileUrl,
+                        file_name: fileName,
+                        file_size: fileSize
+                    })
+                });
+
+                const result = await response.json();
+
+                if (!result.success) {
+                    throw new Error(result.message);
+                }
+
+                showSuccess(currentEditId ? '자료가 수정되었습니다.' : '자료가 등록되었습니다.');
+                closeModal();
+                loadDownloads(currentPage);
+            } catch (error) {
+                console.error('저장 실패:', error);
+                showError(error.message || '저장에 실패했습니다.');
+            }
+        }
+
+        // 자료 삭제
+        async function deleteDownload(id) {
+            if (!confirm('정말 이 자료를 삭제하시겠습니까?')) {
+                return;
+            }
+
+            try {
+                const token = localStorage.getItem('token');
+                const response = await fetch(`/api/download/${id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                const result = await response.json();
+
+                if (!result.success) {
+                    throw new Error(result.message);
+                }
+
+                showSuccess('자료가 삭제되었습니다.');
+                loadDownloads(currentPage);
+            } catch (error) {
+                console.error('삭제 실패:', error);
+                showError('삭제에 실패했습니다.');
+            }
+        }
+
+        // HTML 이스케이프
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // 날짜 포맷
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('ko-KR', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+
+        // 에러 메시지 표시
+        function showError(message) {
+            alert('❌ ' + message);
+        }
+
+        // 성공 메시지 표시
+        function showSuccess(message) {
+            alert('✅ ' + message);
         }
     </script>
 </body>
