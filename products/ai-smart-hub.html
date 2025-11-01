@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 스마트허브 - 주식회사 모하</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-fadeInUp {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        .dropdown-menu {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+        .group:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-green-50 via-white to-teal-50">
+    <!-- Navigation -->
+    <nav class="bg-white/90 backdrop-blur-md shadow-lg sticky top-0 z-50 border-b-2 border-purple-100">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="/index.html" class="flex items-center space-x-3 group">
+                    <div class="w-12 h-12 bg-gradient-to-br from-purple-600 to-pink-600 rounded-xl flex items-center justify-center transform group-hover:rotate-6 transition-transform duration-300">
+                        <span class="text-white font-bold text-xl">모하</span>
+                    </div>
+                    <span class="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                        주식회사 모하
+                    </span>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-1">
+                    <a href="/index.html" class="px-4 py-2 rounded-lg hover:bg-purple-50 transition-all duration-300 font-medium text-gray-700 hover:text-purple-600">
+                        홈
+                    </a>
+                    
+                    <!-- 회사소개 Dropdown -->
+                    <div class="relative group">
+                        <button class="px-4 py-2 rounded-lg hover:bg-purple-50 transition-all duration-300 font-medium text-gray-700 hover:text-purple-600 flex items-center gap-1">
+                            회사소개
+                            <i class="fas fa-chevron-down text-xs group-hover:rotate-180 transition-transform duration-300"></i>
+                        </button>
+                        <div class="dropdown-menu absolute top-full left-1/2 -translate-x-1/2 mt-2 w-56 bg-white/95 backdrop-blur-md rounded-xl shadow-2xl border border-purple-100 py-2">
+                            <a href="/about/index.html#vision" class="block px-6 py-3 hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 transition-all duration-300 text-gray-700 hover:text-purple-600 border-l-4 border-transparent hover:border-purple-500">
+                                <i class="fas fa-lightbulb mr-2"></i>비전
+                            </a>
+                            <a href="/about/index.html#organization" class="block px-6 py-3 hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 transition-all duration-300 text-gray-700 hover:text-purple-600 border-l-4 border-transparent hover:border-purple-500">
+                                <i class="fas fa-sitemap mr-2"></i>조직도
+                            </a>
+                            <a href="/about/index.html#history" class="block px-6 py-3 hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 transition-all duration-300 text-gray-700 hover:text-purple-600 border-l-4 border-transparent hover:border-purple-500">
+                                <i class="fas fa-history mr-2"></i>연혁
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 사업영역 Link -->
+                    <a href="/business/index.html" class="px-4 py-2 rounded-lg hover:bg-purple-50 transition-all duration-300 font-medium text-gray-700 hover:text-purple-600">
+                        사업영역
+                    </a>
+
+                    <!-- 제품소개 Dropdown -->
+                    <div class="relative group">
+                        <button class="px-4 py-2 rounded-lg bg-gradient-to-r from-purple-50 to-pink-50 transition-all duration-300 font-medium text-purple-600 flex items-center gap-1 shadow-sm">
+                            제품소개
+                            <i class="fas fa-chevron-down text-xs group-hover:rotate-180 transition-transform duration-300"></i>
+                        </button>
+                        <div class="dropdown-menu absolute top-full left-1/2 -translate-x-1/2 mt-2 w-56 bg-white/95 backdrop-blur-md rounded-xl shadow-2xl border border-purple-100 py-2">
+                            <a href="/products/wooridoori.html" class="block px-6 py-3 hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 transition-all duration-300 text-gray-700 hover:text-purple-600 border-l-4 border-transparent hover:border-purple-500">
+                                <i class="fas fa-heart mr-2"></i>우리두리 돌봄인형
+                            </a>
+                            <a href="/products/kiosk.html" class="block px-6 py-3 hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 transition-all duration-300 text-gray-700 hover:text-purple-600 border-l-4 border-transparent hover:border-purple-500">
+                                <i class="fas fa-desktop mr-2"></i>배리어프리 키오스크
+                            </a>
+                            <a href="/products/ai-smart-hub.html" class="block px-6 py-3 bg-gradient-to-r from-purple-50 to-pink-50 text-purple-600 border-l-4 border-purple-500">
+                                <i class="fas fa-ear-deaf mr-2"></i>AI 스마트허브
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 연구개발 Link -->
+                    <a href="/research/capability.html" class="px-4 py-2 rounded-lg hover:bg-purple-50 transition-all duration-300 font-medium text-gray-700 hover:text-purple-600">
+                        연구개발
+                    </a>
+
+                    <a href="/index.html#contact" class="px-4 py-2 rounded-lg hover:bg-purple-50 transition-all duration-300 font-medium text-gray-700 hover:text-purple-600">
+                        문의하기
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden text-gray-600 hover:text-purple-600" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="hidden md:hidden pb-4">
+                <a href="/index.html" class="block px-4 py-2 hover:bg-purple-50 rounded-lg transition-colors">홈</a>
+                <a href="/about/index.html" class="block px-4 py-2 hover:bg-purple-50 rounded-lg transition-colors">회사소개</a>
+                <a href="/business/index.html" class="block px-4 py-2 hover:bg-purple-50 rounded-lg transition-colors">사업영역</a>
+                <a href="/products/wooridoori.html" class="block px-4 py-3 hover:bg-purple-50 rounded-lg transition-colors pl-8">
+                    <i class="fas fa-heart mr-2"></i>우리두리 돌봄인형
+                </a>
+                <a href="/products/kiosk.html" class="block px-4 py-3 hover:bg-purple-50 rounded-lg transition-colors pl-8">
+                    <i class="fas fa-desktop mr-2"></i>배리어프리 키오스크
+                </a>
+                <a href="/products/ai-smart-hub.html" class="block px-4 py-3 bg-purple-50 rounded-lg text-purple-600 pl-8">
+                    <i class="fas fa-ear-deaf mr-2"></i>AI 스마트허브
+                </a>
+                <a href="/research/capability.html" class="block px-4 py-2 hover:bg-purple-50 rounded-lg transition-colors">연구개발</a>
+                <a href="/index.html#contact" class="block px-4 py-2 hover:bg-purple-50 rounded-lg transition-colors">문의하기</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative py-20 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-green-100 via-teal-50 to-cyan-100 opacity-50"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-4xl mx-auto text-center animate-fadeInUp">
+                <div class="inline-block mb-6">
+                    <span class="px-6 py-2 bg-gradient-to-r from-green-500 to-teal-500 text-white rounded-full text-sm font-semibold shadow-lg">
+                        <i class="fas fa-ear-deaf mr-2"></i>청각장애인 자립생활 지원
+                    </span>
+                </div>
+                <h1 class="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-green-600 via-teal-600 to-cyan-600 bg-clip-text text-transparent">
+                    AI 스마트허브
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed">
+                    소리를 시각화하여 청각장애인의 독립적인 생활을 지원하는 스마트 솔루션
+                </p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <div class="px-6 py-3 bg-white rounded-lg shadow-md">
+                        <i class="fas fa-volume-up text-green-500 mr-2"></i>
+                        <span class="font-semibold text-gray-700">소리 시각화</span>
+                    </div>
+                    <div class="px-6 py-3 bg-white rounded-lg shadow-md">
+                        <i class="fas fa-bell text-teal-500 mr-2"></i>
+                        <span class="font-semibold text-gray-700">응급 알림</span>
+                    </div>
+                    <div class="px-6 py-3 bg-white rounded-lg shadow-md">
+                        <i class="fas fa-home text-cyan-500 mr-2"></i>
+                        <span class="font-semibold text-gray-700">스마트홈 연동</span>
+                    </div>
+                    <div class="px-6 py-3 bg-white rounded-lg shadow-md">
+                        <i class="fas fa-mobile-alt text-green-500 mr-2"></i>
+                        <span class="font-semibold text-gray-700">모바일 연동</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <!-- Product Introduction -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                <!-- Product Image -->
+                <div class="bg-white rounded-xl shadow-lg p-8 flex items-center justify-center">
+                    <img src="https://cdn1.genspark.ai/user-upload-image/rmbg_generated/0_5bd4ef82-3677-4cf2-a990-770b04873d35" 
+                         alt="AI 스마트허브" 
+                         class="w-full h-96 object-contain drop-shadow-2xl">
+                </div>
+
+                <!-- Product Overview -->
+                <div class="bg-gradient-to-br from-green-50 to-teal-50 rounded-xl shadow-lg p-8">
+                    <h2 class="text-3xl font-bold mb-6 text-gray-800">
+                        <i class="fas fa-info-circle text-green-500 mr-3"></i>제품 개요
+                    </h2>
+                    <div class="space-y-4">
+                        <p class="text-gray-700 leading-relaxed text-lg">
+                            AI 스마트허브는 청각장애인이 일상생활에서 겪는 소리 인지의 어려움을 해결하고, 
+                            독립적이고 안전한 생활을 지원하는 AI 기반 스마트 홈 솔루션입니다.
+                        </p>
+                        <div class="bg-white rounded-lg p-4 shadow-md">
+                            <h3 class="font-bold text-lg mb-3 text-gray-800">핵심 특징</h3>
+                            <ul class="space-y-2">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mr-3 mt-1"></i>
+                                    <span class="text-gray-700">실시간 소리 인식 및 시각화</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mr-3 mt-1"></i>
+                                    <span class="text-gray-700">응급 상황 자동 감지 및 알림</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mr-3 mt-1"></i>
+                                    <span class="text-gray-700">스마트홈 기기 통합 제어</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mr-3 mt-1"></i>
+                                    <span class="text-gray-700">보호자 앱을 통한 원격 모니터링</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mr-3 mt-1"></i>
+                                    <span class="text-gray-700">맞춤형 알림 설정 및 학습 기능</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bg-gradient-to-r from-green-100 to-teal-100 rounded-lg p-4 border-l-4 border-green-500">
+                            <p class="text-sm text-gray-700">
+                                <i class="fas fa-award text-green-600 mr-2"></i>
+                                <strong>특허 출원:</strong> 10-2023-0144505 | <strong>디자인등록:</strong> 30-2023-0045458
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key Features -->
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold mb-8 text-center text-gray-800">
+                    <i class="fas fa-star text-yellow-500 mr-3"></i>주요 기능
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Feature 1 -->
+                    <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                        <div class="w-16 h-16 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center mb-4 shadow-lg">
+                            <i class="fas fa-wave-square text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-gray-800">소리 시각화</h3>
+                        <p class="text-gray-600">
+                            주변 소리를 실시간으로 감지하여 화면에 시각적으로 표시합니다. 
+                            초인종, 전화벨, 알람 등 다양한 소리를 아이콘과 색상으로 구분합니다.
+                        </p>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                        <div class="w-16 h-16 bg-gradient-to-br from-teal-400 to-teal-600 rounded-full flex items-center justify-center mb-4 shadow-lg">
+                            <i class="fas fa-exclamation-triangle text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-gray-800">응급 감지</h3>
+                        <p class="text-gray-600">
+                            화재 경보, 가스 누출, 침입자 경보 등 위험 상황을 자동으로 감지하고 
+                            강력한 진동과 빛으로 즉시 알립니다.
+                        </p>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                        <div class="w-16 h-16 bg-gradient-to-br from-cyan-400 to-cyan-600 rounded-full flex items-center justify-center mb-4 shadow-lg">
+                            <i class="fas fa-home text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-gray-800">스마트홈 연동</h3>
+                        <p class="text-gray-600">
+                            조명, 도어락, 가전제품 등 스마트홈 기기와 연동하여 
+                            편리하고 안전한 생활 환경을 제공합니다.
+                        </p>
+                    </div>
+
+                    <!-- Feature 4 -->
+                    <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                        <div class="w-16 h-16 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center mb-4 shadow-lg">
+                            <i class="fas fa-mobile-alt text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-gray-800">모바일 연동</h3>
+                        <p class="text-gray-600">
+                            전용 모바일 앱을 통해 언제 어디서나 허브 상태를 확인하고 
+                            알림 설정을 관리할 수 있습니다.
+                        </p>
+                    </div>
+
+                    <!-- Feature 5 -->
+                    <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                        <div class="w-16 h-16 bg-gradient-to-br from-teal-400 to-teal-600 rounded-full flex items-center justify-center mb-4 shadow-lg">
+                            <i class="fas fa-user-friends text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-gray-800">보호자 모니터링</h3>
+                        <p class="text-gray-600">
+                            보호자가 사용자의 안전 상태를 원격으로 확인하고 
+                            응급 상황 시 즉시 알림을 받을 수 있습니다.
+                        </p>
+                    </div>
+
+                    <!-- Feature 6 -->
+                    <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                        <div class="w-16 h-16 bg-gradient-to-br from-cyan-400 to-cyan-600 rounded-full flex items-center justify-center mb-4 shadow-lg">
+                            <i class="fas fa-brain text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-gray-800">AI 학습</h3>
+                        <p class="text-gray-600">
+                            사용 패턴을 학습하여 개인 맞춤형 알림을 제공하고 
+                            불필요한 알림을 자동으로 필터링합니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sound Detection Types -->
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold mb-8 text-center text-gray-800">
+                    <i class="fas fa-music text-purple-500 mr-3"></i>인식 가능한 소리 유형
+                </h2>
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <!-- Category 1 -->
+                        <div class="text-center p-4 bg-gradient-to-br from-red-50 to-red-100 rounded-lg">
+                            <div class="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-3 shadow-lg">
+                                <i class="fas fa-fire text-white text-2xl"></i>
+                            </div>
+                            <h3 class="font-bold text-gray-800 mb-2">응급 경보</h3>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>화재 경보기</li>
+                                <li>가스 누출 경보</li>
+                                <li>침입자 경보</li>
+                                <li>응급 사이렌</li>
+                            </ul>
+                        </div>
+
+                        <!-- Category 2 -->
+                        <div class="text-center p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg">
+                            <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-3 shadow-lg">
+                                <i class="fas fa-bell text-white text-2xl"></i>
+                            </div>
+                            <h3 class="font-bold text-gray-800 mb-2">생활 소리</h3>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>초인종</li>
+                                <li>전화벨</li>
+                                <li>알람 시계</li>
+                                <li>타이머</li>
+                            </ul>
+                        </div>
+
+                        <!-- Category 3 -->
+                        <div class="text-center p-4 bg-gradient-to-br from-green-50 to-green-100 rounded-lg">
+                            <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-3 shadow-lg">
+                                <i class="fas fa-utensils text-white text-2xl"></i>
+                            </div>
+                            <h3 class="font-bold text-gray-800 mb-2">가전 소리</h3>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>전자레인지 완료음</li>
+                                <li>세탁기 완료음</li>
+                                <li>밥솥 알림</li>
+                                <li>식기세척기</li>
+                            </ul>
+                        </div>
+
+                        <!-- Category 4 -->
+                        <div class="text-center p-4 bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg">
+                            <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-3 shadow-lg">
+                                <i class="fas fa-baby text-white text-2xl"></i>
+                            </div>
+                            <h3 class="font-bold text-gray-800 mb-2">가족 소리</h3>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>아기 울음소리</li>
+                                <li>반려동물 소리</li>
+                                <li>문 여닫는 소리</li>
+                                <li>노크 소리</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Configuration -->
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold mb-8 text-center text-gray-800">
+                    <i class="fas fa-project-diagram text-indigo-500 mr-3"></i>시스템 구성
+                </h2>
+                <div class="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-xl shadow-lg p-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <!-- Component 1 -->
+                        <div class="bg-white rounded-lg p-6 text-center shadow-md">
+                            <div class="w-20 h-20 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                                <i class="fas fa-microphone text-white text-3xl"></i>
+                            </div>
+                            <h3 class="font-bold text-lg mb-2 text-gray-800">허브 디바이스</h3>
+                            <p class="text-sm text-gray-600">
+                                고성능 마이크 어레이로 360도 전방향 소리 수집 및 AI 분석
+                            </p>
+                        </div>
+
+                        <!-- Component 2 -->
+                        <div class="bg-white rounded-lg p-6 text-center shadow-md">
+                            <div class="w-20 h-20 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                                <i class="fas fa-server text-white text-3xl"></i>
+                            </div>
+                            <h3 class="font-bold text-lg mb-2 text-gray-800">클라우드 서버</h3>
+                            <p class="text-sm text-gray-600">
+                                AI 소리 분석 엔진 및 데이터 저장, 학습 모델 업데이트
+                            </p>
+                        </div>
+
+                        <!-- Component 3 -->
+                        <div class="bg-white rounded-lg p-6 text-center shadow-md">
+                            <div class="w-20 h-20 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                                <i class="fas fa-mobile-alt text-white text-3xl"></i>
+                            </div>
+                            <h3 class="font-bold text-lg mb-2 text-gray-800">모바일 앱</h3>
+                            <p class="text-sm text-gray-600">
+                                사용자 및 보호자용 알림 수신, 설정 관리, 모니터링
+                            </p>
+                        </div>
+
+                        <!-- Component 4 -->
+                        <div class="bg-white rounded-lg p-6 text-center shadow-md">
+                            <div class="w-20 h-20 bg-gradient-to-br from-teal-400 to-teal-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                                <i class="fas fa-plug text-white text-3xl"></i>
+                            </div>
+                            <h3 class="font-bold text-lg mb-2 text-gray-800">IoT 연동</h3>
+                            <p class="text-sm text-gray-600">
+                                스마트홈 기기 제어 및 자동화 시나리오 실행
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Specifications -->
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold mb-8 text-center text-gray-800">
+                    <i class="fas fa-cog text-gray-500 mr-3"></i>기술 사양
+                </h2>
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Hardware Specs -->
+                        <div>
+                            <h3 class="text-2xl font-bold mb-4 text-gray-800 flex items-center">
+                                <i class="fas fa-microchip text-green-500 mr-3"></i>하드웨어 사양
+                            </h3>
+                            <div class="space-y-3">
+                                <div class="flex justify-between p-3 bg-gray-50 rounded-lg">
+                                    <span class="font-semibold text-gray-700">마이크</span>
+                                    <span class="text-gray-600">4채널 마이크 어레이</span>
+                                </div>
+                                <div class="flex justify-between p-3 bg-gray-50 rounded-lg">
+                                    <span class="font-semibold text-gray-700">디스플레이</span>
+                                    <span class="text-gray-600">7" 터치스크린 LCD</span>
+                                </div>
+                                <div class="flex justify-between p-3 bg-gray-50 rounded-lg">
+                                    <span class="font-semibold text-gray-700">프로세서</span>
+                                    <span class="text-gray-600">ARM Cortex-A53 Quad Core</span>
+                                </div>
+                                <div class="flex justify-between p-3 bg-gray-50 rounded-lg">
+                                    <span class="font-semibold text-gray-700">메모리</span>
+                                    <span class="text-gray-600">2GB RAM / 16GB Storage</span>
+                                </div>
+                                <div class="flex justify-between p-3 bg-gray-50 rounded-lg">
+                                    <span class="font-semibold text-gray-700">연결</span>
+                                    <span class="text-gray-600">WiFi 5, Bluetooth 5.0, Zigbee</span>
+                                </div>
+                                <div class="flex justify-between p-3 bg-gray-50 rounded-lg">
+                                    <span class="font-semibold text-gray-700">알림</span>
+                                    <span class="text-gray-600">LED 조명, 진동 모터</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Software Specs -->
+                        <div>
+                            <h3 class="text-2xl font-bold mb-4 text-gray-800 flex items-center">
+                                <i class="fas fa-code text-teal-500 mr-3"></i>소프트웨어 사양
+                            </h3>
+                            <div class="space-y-3">
+                                <div class="flex justify-between p-3 bg-gray-50 rounded-lg">
+                                    <span class="font-semibold text-gray-700">AI 엔진</span>
+                                    <span class="text-gray-600">딥러닝 기반 소리 분류</span>
+                                </div>
+                                <div class="flex justify-between p-3 bg-gray-50 rounded-lg">
+                                    <span class="font-semibold text-gray-700">인식 정확도</span>
+                                    <span class="text-gray-600">95% 이상</span>
+                                </div>
+                                <div class="flex justify-between p-3 bg-gray-50 rounded-lg">
+                                    <span class="font-semibold text-gray-700">응답 시간</span>
+                                    <span class="text-gray-600">0.5초 이내</span>
+                                </div>
+                                <div class="flex justify-between p-3 bg-gray-50 rounded-lg">
+                                    <span class="font-semibold text-gray-700">소리 분류</span>
+                                    <span class="text-gray-600">50+ 종류</span>
+                                </div>
+                                <div class="flex justify-between p-3 bg-gray-50 rounded-lg">
+                                    <span class="font-semibold text-gray-700">언어 지원</span>
+                                    <span class="text-gray-600">한국어, 영어</span>
+                                </div>
+                                <div class="flex justify-between p-3 bg-gray-50 rounded-lg">
+                                    <span class="font-semibold text-gray-700">업데이트</span>
+                                    <span class="text-gray-600">OTA 자동 업데이트</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Benefits -->
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold mb-8 text-center text-gray-800">
+                    <i class="fas fa-heart text-red-500 mr-3"></i>기대 효과
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Benefit 1 -->
+                    <div class="bg-gradient-to-br from-green-50 to-teal-50 rounded-xl shadow-lg p-6">
+                        <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mb-4 shadow-lg">
+                            <i class="fas fa-user-check text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-gray-800">자립 생활 지원</h3>
+                        <p class="text-gray-600">
+                            청각장애인이 타인의 도움 없이 독립적으로 일상생활을 영위할 수 있도록 지원하여 
+                            삶의 질을 향상시킵니다.
+                        </p>
+                    </div>
+
+                    <!-- Benefit 2 -->
+                    <div class="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl shadow-lg p-6">
+                        <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mb-4 shadow-lg">
+                            <i class="fas fa-shield-alt text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-gray-800">안전성 강화</h3>
+                        <p class="text-gray-600">
+                            화재, 가스 누출 등 위험 상황을 즉시 감지하고 알려 생명과 재산을 보호합니다.
+                        </p>
+                    </div>
+
+                    <!-- Benefit 3 -->
+                    <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl shadow-lg p-6">
+                        <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mb-4 shadow-lg">
+                            <i class="fas fa-heart text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-gray-800">가족 안심</h3>
+                        <p class="text-gray-600">
+                            보호자가 원격으로 안전 상태를 확인할 수 있어 가족 모두가 안심할 수 있습니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Use Cases -->
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold mb-8 text-center text-gray-800">
+                    <i class="fas fa-lightbulb text-yellow-500 mr-3"></i>활용 사례
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Use Case 1 -->
+                    <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition-all duration-300">
+                        <div class="flex items-start mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-green-400 to-green-600 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-home text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold mb-2 text-gray-800">가정용</h3>
+                                <p class="text-gray-600 text-sm">
+                                    1인 가구 청각장애인이 안전하고 편리하게 생활할 수 있도록 지원합니다. 
+                                    초인종, 화재경보, 가전제품 알림 등을 시각화하여 독립적인 생활이 가능합니다.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Use Case 2 -->
+                    <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition-all duration-300">
+                        <div class="flex items-start mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-building text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold mb-2 text-gray-800">사무실</h3>
+                                <p class="text-gray-600 text-sm">
+                                    청각장애인 직장인이 업무 환경에서 각종 알림을 놓치지 않고 
+                                    동료들과 원활하게 협업할 수 있도록 지원합니다.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Use Case 3 -->
+                    <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition-all duration-300">
+                        <div class="flex items-start mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-purple-400 to-purple-600 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-school text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold mb-2 text-gray-800">교육 기관</h3>
+                                <p class="text-gray-600 text-sm">
+                                    청각장애 학생이 학교나 교육시설에서 수업 시작 종, 화재 경보 등 
+                                    중요한 소리를 인지하여 안전하게 학습할 수 있습니다.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Use Case 4 -->
+                    <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition-all duration-300">
+                        <div class="flex items-start mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-teal-400 to-teal-600 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-hotel text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold mb-2 text-gray-800">숙박 시설</h3>
+                                <p class="text-gray-600 text-sm">
+                                    호텔, 게스트하우스 등에서 청각장애인 고객이 화재 경보, 문 노크 등을 
+                                    인지하여 안전하게 숙박할 수 있습니다.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Section -->
+            <div class="text-center bg-gradient-to-r from-green-500 via-teal-500 to-cyan-500 rounded-xl shadow-2xl p-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+                    AI 스마트허브 도입 문의
+                </h2>
+                <p class="text-xl text-white/90 mb-8">
+                    청각장애인의 안전하고 독립적인 생활을 위한 AI 솔루션
+                </p>
+                <a href="/index.html#contact" 
+                   class="inline-block bg-white text-green-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1">
+                    <i class="fas fa-envelope mr-2"></i>지금 문의하기
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-r from-purple-900 via-purple-800 to-pink-900 text-white py-12 mt-20">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 flex items-center">
+                        <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center mr-3">
+                            <span class="text-purple-600 font-bold">모하</span>
+                        </div>
+                        주식회사 모하
+                    </h3>
+                    <p class="text-purple-200">
+                        기술로 더 나은 세상을 만들어갑니다
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">빠른 링크</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/about/index.html" class="text-purple-200 hover:text-white transition-colors">회사소개</a></li>
+                        <li><a href="/business/index.html" class="text-purple-200 hover:text-white transition-colors">사업영역</a></li>
+                        <li><a href="/products/wooridoori.html" class="text-purple-200 hover:text-white transition-colors">우리두리 돌봄인형</a></li>
+                        <li><a href="/products/kiosk.html" class="text-purple-200 hover:text-white transition-colors">배리어프리 키오스크</a></li>
+                        <li><a href="/products/ai-smart-hub.html" class="text-purple-200 hover:text-white transition-colors">AI 스마트허브</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">문의하기</h4>
+                    <ul class="space-y-2 text-purple-200">
+                        <li><i class="fas fa-envelope mr-2"></i>contact@moha.co.kr</li>
+                        <li><i class="fas fa-phone mr-2"></i>02-1234-5678</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-purple-700 pt-8 text-center text-purple-200">
+                <p>&copy; 2024 주식회사 모하. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        }
+    </script>
+</body>
+</html>
