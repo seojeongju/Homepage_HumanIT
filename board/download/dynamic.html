@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>자료실 - (주)휴먼아이티</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-20">
+                <a href="/" class="flex items-center space-x-3">
+                    <img src="https://page.gensparksite.com/v1/base64_upload/a083f176d0e758352a6c24af9ebea7fa" alt="휴먼아이티 로고" class="h-12"/>
+                </a>
+                <nav class="hidden md:flex items-center space-x-1">
+                    <a href="/" class="px-4 py-2 text-gray-700 hover:text-blue-600 font-medium">HOME</a>
+                    <a href="/about" class="px-4 py-2 text-gray-700 hover:text-blue-600 font-medium">회사소개</a>
+                    <a href="/products/wooridoori.html" class="px-4 py-2 text-gray-700 hover:text-blue-600 font-medium">제품소개</a>
+                    <a href="/board/notice" class="px-4 py-2 text-gray-700 hover:text-blue-600 font-medium">고객지원</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-16">
+        <div class="container mx-auto px-4">
+            <h1 class="text-4xl font-bold mb-4">자료실</h1>
+            <p class="text-xl text-blue-100">Download Center</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="py-12">
+        <div class="container mx-auto px-4">
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
+                    <h2 class="text-xl font-bold text-gray-800">전체 자료</h2>
+                    <p class="text-sm text-gray-500 mt-1">총 <span id="totalCount" class="text-blue-600 font-semibold">0</span>건</p>
+                </div>
+
+                <!-- 자료 목록 -->
+                <div id="downloadList" class="divide-y divide-gray-200">
+                    <div class="p-12 text-center">
+                        <i class="fas fa-spinner fa-spin text-3xl text-gray-400 mb-4"></i>
+                        <p class="text-gray-500">로딩 중...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // 자료 목록 로드
+        async function loadDownloads() {
+            try {
+                const response = await fetch('/api/download?page=1&limit=100');
+                const result = await response.json();
+
+                if (!result.success) {
+                    throw new Error(result.message);
+                }
+
+                const { downloads, pagination } = result.data;
+                
+                document.getElementById('totalCount').textContent = pagination.total || 0;
+
+                const listEl = document.getElementById('downloadList');
+
+                if (!downloads || downloads.length === 0) {
+                    listEl.innerHTML = `
+                        <div class="p-12 text-center">
+                            <i class="fas fa-folder-open text-5xl text-gray-300 mb-4"></i>
+                            <p class="text-gray-500">등록된 자료가 없습니다</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                listEl.innerHTML = downloads.map(download => `
+                    <div class="p-6 hover:bg-gray-50 transition">
+                        <div class="flex items-start justify-between">
+                            <div class="flex-1">
+                                <h3 class="text-lg font-bold text-gray-900 mb-2">${escapeHtml(download.title)}</h3>
+                                ${download.description ? `<p class="text-gray-600 mb-3">${escapeHtml(download.description)}</p>` : ''}
+                                <div class="flex items-center space-x-4 text-sm text-gray-500">
+                                    ${download.file_name ? `<span><i class="fas fa-file mr-1"></i>${escapeHtml(download.file_name)}</span>` : ''}
+                                    ${download.file_size ? `<span><i class="fas fa-weight mr-1"></i>${escapeHtml(download.file_size)}</span>` : ''}
+                                    <span><i class="fas fa-download mr-1"></i>${download.downloads_count || 0} 다운로드</span>
+                                    <span><i class="fas fa-clock mr-1"></i>${formatDate(download.created_at)}</span>
+                                </div>
+                            </div>
+                            <a href="${escapeHtml(download.file_url)}" download target="_blank" 
+                               class="ml-4 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition flex items-center">
+                                <i class="fas fa-download mr-2"></i>다운로드
+                            </a>
+                        </div>
+                    </div>
+                `).join('');
+
+            } catch (error) {
+                console.error('자료 목록 로드 실패:', error);
+                document.getElementById('downloadList').innerHTML = `
+                    <div class="p-12 text-center">
+                        <i class="fas fa-exclamation-circle text-5xl text-red-300 mb-4"></i>
+                        <p class="text-gray-500">자료를 불러오는데 실패했습니다</p>
+                    </div>
+                `;
+            }
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('ko-KR', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+
+        // 페이지 로드 시 실행
+        document.addEventListener('DOMContentLoaded', loadDownloads);
+    </script>
+</body>
+</html>
