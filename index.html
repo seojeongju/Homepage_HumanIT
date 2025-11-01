@@ -74,10 +74,16 @@
           <a href="/contact" class="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-200 shadow-md hover:shadow-lg">Contact us</a>
         </nav><button class="md:hidden text-gray-700 text-2xl"><i class="fas fa-bars"></i></button></div></div></header><main><section class="relative h-[600px] overflow-hidden bg-gray-900">
 <style>
-.hero-slide .hero-bg {
-transition: transform 0.3s ease-out;
+.hero-slide {
+pointer-events: none;
 }
-.hero-slide:hover .hero-bg {
+.hero-slide.opacity-100 {
+pointer-events: auto;
+}
+.hero-slide .hero-bg {
+transition: transform 0.5s ease-out;
+}
+.hero-slide.opacity-100:hover .hero-bg {
 transform: scale(1.05);
 }
 </style>
