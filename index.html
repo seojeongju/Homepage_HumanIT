@@ -454,9 +454,15 @@ transform: scale(1.05);
 </div>
 
 <!-- 3. 고객상담/회사정보 카드 -->
-<div class="self-end bg-gradient-to-br from-red-50 to-pink-50 rounded-lg shadow-md overflow-hidden border-2 border-red-200 hover:shadow-xl transition flex flex-col h-1/2">
+<div class="self-end relative rounded-lg shadow-md overflow-hidden border-2 border-red-200 hover:shadow-xl transition flex flex-col h-1/2">
+<!-- 백그라운드 이미지 -->
+<div class="absolute inset-0 z-0">
+<img src="https://page.gensparksite.com/v1/base64_upload/b27e7a64d81b245f86a075ea676db901" alt="Customer Service Background" class="w-full h-full object-cover">
+<!-- 반투명 오버레이 -->
+<div class="absolute inset-0 bg-gradient-to-br from-red-50/95 to-pink-50/95"></div>
+</div>
 <!-- 콘텐츠 -->
-<div class="flex-1 p-4">
+<div class="relative z-10 flex-1 p-4">
 <div class="text-center mb-3">
 <h4 class="text-lg font-bold mb-1 text-gray-800">고객상담</h4>
 <p class="text-red-600 text-xs font-semibold">CS Center</p>
