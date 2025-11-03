@@ -711,4 +711,101 @@ animation-play-state: paused;
 </div>
 </section>
 
+<!-- 협력기관 섹션 -->
+<section class="py-12 bg-gradient-to-r from-gray-50 to-blue-50">
+<div class="container mx-auto px-4">
+<div class="text-center mb-8">
+<h2 class="text-3xl font-bold text-gray-900 mb-2">협력기관</h2>
+<p class="text-gray-600">Partners & Collaborators</p>
+</div>
+
+<!-- 스크롤 컨테이너 -->
+<div class="relative overflow-hidden">
+<!-- 그라디언트 오버레이 (좌우) -->
+<div class="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-gray-50 to-transparent z-10 pointer-events-none"></div>
+<div class="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-blue-50 to-transparent z-10 pointer-events-none"></div>
+
+<!-- 스크롤 애니메이션 -->
+<div class="partners-scroll flex items-center gap-12">
+<!-- 첫 번째 세트 -->
+<div class="flex items-center justify-center min-w-[200px] h-24 bg-white rounded-lg shadow-md px-6 hover:shadow-xl transition">
+<span class="text-lg font-bold text-gray-800">NEK Group</span>
+</div>
+<div class="flex items-center justify-center min-w-[200px] h-24 bg-white rounded-lg shadow-md px-6 hover:shadow-xl transition">
+<span class="text-lg font-bold text-gray-800">ENERGIA Business Solution</span>
+</div>
+<div class="flex items-center justify-center min-w-[200px] h-24 bg-white rounded-lg shadow-md px-6 hover:shadow-xl transition">
+<span class="text-lg font-bold text-gray-800">㈜밴엔포스</span>
+</div>
+<div class="flex items-center justify-center min-w-[200px] h-24 bg-white rounded-lg shadow-md px-6 hover:shadow-xl transition">
+<span class="text-lg font-bold text-gray-800">㈜솔메카</span>
+</div>
+<div class="flex items-center justify-center min-w-[200px] h-24 bg-white rounded-lg shadow-md px-6 hover:shadow-xl transition">
+<span class="text-lg font-bold text-gray-800">㈜비오프</span>
+</div>
+<div class="flex items-center justify-center min-w-[200px] h-24 bg-white rounded-lg shadow-md px-6 hover:shadow-xl transition">
+<span class="text-lg font-bold text-gray-800">㈜와우쓰리디</span>
+</div>
+<div class="flex items-center justify-center min-w-[200px] h-24 bg-white rounded-lg shadow-md px-6 hover:shadow-xl transition">
+<span class="text-lg font-bold text-gray-800">사)3D프린팅산업협회</span>
+</div>
+<div class="flex items-center justify-center min-w-[200px] h-24 bg-white rounded-lg shadow-md px-6 hover:shadow-xl transition">
+<span class="text-lg font-bold text-gray-800">구미디지털산업사업협동조합</span>
+</div>
+<div class="flex items-center justify-center min-w-[200px] h-24 bg-white rounded-lg shadow-md px-6 hover:shadow-xl transition">
+<span class="text-lg font-bold text-gray-800">경운대학교 S/W중심대학사업단</span>
+</div>
+
+<!-- 두 번째 세트 (무한 스크롤용 복제) -->
+<div class="flex items-center justify-center min-w-[200px] h-24 bg-white rounded-lg shadow-md px-6 hover:shadow-xl transition">
+<span class="text-lg font-bold text-gray-800">NEK Group</span>
+</div>
+<div class="flex items-center justify-center min-w-[200px] h-24 bg-white rounded-lg shadow-md px-6 hover:shadow-xl transition">
+<span class="text-lg font-bold text-gray-800">ENERGIA Business Solution</span>
+</div>
+<div class="flex items-center justify-center min-w-[200px] h-24 bg-white rounded-lg shadow-md px-6 hover:shadow-xl transition">
+<span class="text-lg font-bold text-gray-800">㈜밴엔포스</span>
+</div>
+<div class="flex items-center justify-center min-w-[200px] h-24 bg-white rounded-lg shadow-md px-6 hover:shadow-xl transition">
+<span class="text-lg font-bold text-gray-800">㈜솔메카</span>
+</div>
+<div class="flex items-center justify-center min-w-[200px] h-24 bg-white rounded-lg shadow-md px-6 hover:shadow-xl transition">
+<span class="text-lg font-bold text-gray-800">㈜비오프</span>
+</div>
+<div class="flex items-center justify-center min-w-[200px] h-24 bg-white rounded-lg shadow-md px-6 hover:shadow-xl transition">
+<span class="text-lg font-bold text-gray-800">㈜와우쓰리디</span>
+</div>
+<div class="flex items-center justify-center min-w-[200px] h-24 bg-white rounded-lg shadow-md px-6 hover:shadow-xl transition">
+<span class="text-lg font-bold text-gray-800">사)3D프린팅산업협회</span>
+</div>
+<div class="flex items-center justify-center min-w-[200px] h-24 bg-white rounded-lg shadow-md px-6 hover:shadow-xl transition">
+<span class="text-lg font-bold text-gray-800">구미디지털산업사업협동조합</span>
+</div>
+<div class="flex items-center justify-center min-w-[200px] h-24 bg-white rounded-lg shadow-md px-6 hover:shadow-xl transition">
+<span class="text-lg font-bold text-gray-800">경운대학교 S/W중심대학사업단</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<style>
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.partners-scroll {
+  animation: scroll-left 40s linear infinite;
+}
+
+.partners-scroll:hover {
+  animation-play-state: paused;
+}
+</style>
+
 </main><footer class="bg-gray-800 text-white py-12"><div class="container mx-auto px-4"><div class="grid grid-cols-1 md:grid-cols-3 gap-8"><div><h3 class="text-xl font-bold mb-4">(주)휴먼아이티</h3><p class="text-gray-400 mb-4">최고의 품질과 기술력으로<br/>고객의 성공을 함께합니다.</p></div><div><h4 class="font-bold mb-4">Contact Info</h4><div class="space-y-2 text-gray-400"><p><i class="fas fa-map-marker-alt mr-2"></i> 경상북도 구미시 고아읍 들성로 7길 5-36</p><p><i class="fas fa-phone mr-2"></i> <a href="tel:054-451-7186" class="hover:text-white">TEL. 054-451-7186</a></p><p><i class="fas fa-fax mr-2"></i> FAX. 050-4073-7186</p><p><i class="fas fa-envelope mr-2"></i> <a href="mailto:yunhero4@naver.com" class="hover:text-white">e-mail. yunhero4@naver.com</a></p></div></div><div><h4 class="font-bold mb-4">Quick Links</h4><div class="space-y-2"><a href="/about" class="block text-gray-400 hover:text-white transition">회사소개</a><a href="/products" class="block text-gray-400 hover:text-white transition">제품소개</a><a href="/contact" class="block text-gray-400 hover:text-white transition">문의하기</a></div></div></div><div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400"><p>© 2024 (주)휴먼아이티. All rights reserved.</p></div></div></footer></div></body></html>
