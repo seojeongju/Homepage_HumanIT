@@ -72,7 +72,129 @@
           </div>
           
           <a href="/admin" class="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-200 shadow-md hover:shadow-lg"><i class="fas fa-user-shield mr-2"></i>관리자</a>
-        </nav><button class="md:hidden text-gray-700 text-2xl"><i class="fas fa-bars"></i></button></div></div></header><main><section class="relative h-[600px] overflow-hidden bg-gray-900">
+        </nav>
+        
+        <!-- 모바일 메뉴 버튼 -->
+        <button id="mobile-menu-button" class="md:hidden text-gray-700 text-2xl p-2 hover:text-blue-600 transition-colors">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+    
+    <!-- 모바일 메뉴 패널 -->
+    <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-200 shadow-lg">
+      <div class="container mx-auto px-4 py-4 space-y-2">
+        <a href="/" class="block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors font-medium">
+          <i class="fas fa-home mr-3"></i>HOME
+        </a>
+        
+        <!-- 회사소개 -->
+        <div class="mobile-menu-section">
+          <button class="mobile-menu-toggle w-full flex items-center justify-between px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors font-medium">
+            <span><i class="fas fa-building mr-3"></i>회사소개</span>
+            <i class="fas fa-chevron-down text-sm transition-transform"></i>
+          </button>
+          <div class="mobile-submenu hidden pl-8 pt-2 space-y-1">
+            <a href="/about" class="block px-4 py-2 text-gray-600 hover:text-blue-600 transition-colors">
+              <i class="fas fa-building text-blue-500 mr-2 text-sm"></i>회사현황
+            </a>
+            <a href="/about/history.html" class="block px-4 py-2 text-gray-600 hover:text-blue-600 transition-colors">
+              <i class="fas fa-history text-blue-500 mr-2 text-sm"></i>회사연혁
+            </a>
+            <a href="/location" class="block px-4 py-2 text-gray-600 hover:text-blue-600 transition-colors">
+              <i class="fas fa-map-marker-alt text-blue-500 mr-2 text-sm"></i>오시는길
+            </a>
+          </div>
+        </div>
+        
+        <!-- 제품소개 -->
+        <div class="mobile-menu-section">
+          <button class="mobile-menu-toggle w-full flex items-center justify-between px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors font-medium">
+            <span><i class="fas fa-box-open mr-3"></i>제품소개</span>
+            <i class="fas fa-chevron-down text-sm transition-transform"></i>
+          </button>
+          <div class="mobile-submenu hidden pl-8 pt-2 space-y-1">
+            <a href="/products/wooridoori.html" class="block px-4 py-2 text-gray-600 hover:text-blue-600 transition-colors">
+              <i class="fas fa-robot text-purple-500 mr-2 text-sm"></i>우리두리 돌봄인형
+            </a>
+            <a href="/products/kiosk.html" class="block px-4 py-2 text-gray-600 hover:text-blue-600 transition-colors">
+              <i class="fas fa-desktop text-purple-500 mr-2 text-sm"></i>배리어프리 키오스크
+            </a>
+            <a href="/products/ai-smart-hub.html" class="block px-4 py-2 text-gray-600 hover:text-blue-600 transition-colors">
+              <i class="fas fa-ear-deaf text-purple-500 mr-2 text-sm"></i>AI 스마트허브
+            </a>
+          </div>
+        </div>
+        
+        <!-- 고객지원 -->
+        <div class="mobile-menu-section">
+          <button class="mobile-menu-toggle w-full flex items-center justify-between px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors font-medium">
+            <span><i class="fas fa-headset mr-3"></i>고객지원</span>
+            <i class="fas fa-chevron-down text-sm transition-transform"></i>
+          </button>
+          <div class="mobile-submenu hidden pl-8 pt-2 space-y-1">
+            <a href="/board/notice" class="block px-4 py-2 text-gray-600 hover:text-blue-600 transition-colors">
+              <i class="fas fa-bullhorn text-green-500 mr-2 text-sm"></i>공지사항
+            </a>
+            <a href="/board/download" class="block px-4 py-2 text-gray-600 hover:text-blue-600 transition-colors">
+              <i class="fas fa-download text-green-500 mr-2 text-sm"></i>자료실
+            </a>
+            <a href="/board/faq" class="block px-4 py-2 text-gray-600 hover:text-blue-600 transition-colors">
+              <i class="fas fa-question-circle text-green-500 mr-2 text-sm"></i>자주하는질문
+            </a>
+            <a href="/board/inquiry" class="block px-4 py-2 text-gray-600 hover:text-blue-600 transition-colors">
+              <i class="fas fa-envelope text-green-500 mr-2 text-sm"></i>문의하기
+            </a>
+          </div>
+        </div>
+        
+        <a href="/admin" class="block px-4 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all text-center font-bold shadow-md">
+          <i class="fas fa-user-shield mr-2"></i>관리자
+        </a>
+      </div>
+    </div>
+    
+    <script>
+      // 모바일 메뉴 토글
+      const mobileMenuButton = document.getElementById('mobile-menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const mobileMenuIcon = mobileMenuButton.querySelector('i');
+      
+      mobileMenuButton.addEventListener('click', function() {
+        mobileMenu.classList.toggle('hidden');
+        
+        // 아이콘 변경 (햄버거 <-> X)
+        if (mobileMenu.classList.contains('hidden')) {
+          mobileMenuIcon.classList.remove('fa-times');
+          mobileMenuIcon.classList.add('fa-bars');
+        } else {
+          mobileMenuIcon.classList.remove('fa-bars');
+          mobileMenuIcon.classList.add('fa-times');
+        }
+      });
+      
+      // 모바일 서브메뉴 토글
+      const mobileMenuToggles = document.querySelectorAll('.mobile-menu-toggle');
+      mobileMenuToggles.forEach(toggle => {
+        toggle.addEventListener('click', function() {
+          const submenu = this.nextElementSibling;
+          const chevron = this.querySelector('.fa-chevron-down');
+          
+          submenu.classList.toggle('hidden');
+          chevron.classList.toggle('rotate-180');
+        });
+      });
+      
+      // 화면 크기 변경 시 모바일 메뉴 닫기
+      window.addEventListener('resize', function() {
+        if (window.innerWidth >= 768) {
+          mobileMenu.classList.add('hidden');
+          mobileMenuIcon.classList.remove('fa-times');
+          mobileMenuIcon.classList.add('fa-bars');
+        }
+      });
+    </script>
+  </header><main><section class="relative h-[600px] overflow-hidden bg-gray-900">
 <style>
 .hero-slide {
 pointer-events: none;
