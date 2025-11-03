@@ -8,10 +8,20 @@
     <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
 </head>
 <body class="bg-gray-100">
-    <div class="flex h-screen">
+    <div class="flex h-screen overflow-hidden">
+        <!-- 모바일 오버레이 -->
+        <div id="sidebarOverlay" class="hidden fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"></div>
+        
         <!-- 사이드바 -->
-        <aside class="w-64 bg-gradient-to-b from-blue-600 to-purple-600 text-white">
+        <aside id="sidebar" class="fixed lg:static inset-y-0 left-0 transform -translate-x-full lg:translate-x-0 w-64 bg-gradient-to-b from-blue-600 to-purple-600 text-white z-50 transition-transform duration-300 ease-in-out">
             <div class="p-6">
+                <!-- 모바일 닫기 버튼 -->
+                <div class="lg:hidden flex justify-end mb-4">
+                    <button id="closeSidebar" class="text-white hover:bg-white/10 p-2 rounded-lg">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
                 <div class="flex items-center space-x-3 mb-8">
                     <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center">
                         <i class="fas fa-user-shield text-blue-600"></i>
@@ -55,25 +65,32 @@
         </aside>
 
         <!-- 메인 컨텐츠 -->
-        <main class="flex-1 overflow-y-auto">
+        <main class="flex-1 overflow-y-auto w-full">
             <!-- 헤더 -->
-            <header class="bg-white shadow-sm">
-                <div class="px-8 py-6">
+            <header class="bg-white shadow-sm sticky top-0 z-30">
+                <div class="px-4 lg:px-8 py-4 lg:py-6">
                     <div class="flex items-center justify-between">
-                        <div>
-                            <h1 class="text-2xl font-bold text-gray-900">FAQ 관리</h1>
-                            <p class="text-gray-500 mt-1">자주 묻는 질문을 추가, 수정, 삭제할 수 있습니다</p>
+                        <div class="flex items-center space-x-4 flex-1">
+                            <!-- 모바일 햄버거 메뉴 -->
+                            <button id="openSidebar" class="lg:hidden text-gray-700 hover:text-blue-600 p-2">
+                                <i class="fas fa-bars text-2xl"></i>
+                            </button>
+                            <div>
+                                <h1 class="text-xl lg:text-2xl font-bold text-gray-900">FAQ 관리</h1>
+                                <p class="text-gray-500 mt-1 text-sm lg:text-base hidden sm:block">자주 묻는 질문을 추가, 수정, 삭제할 수 있습니다</p>
+                            </div>
                         </div>
-                        <button onclick="showCreateModal()" class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition shadow-md hover:shadow-lg">
-                            <i class="fas fa-plus mr-2"></i>
-                            새 FAQ 등록
+                        <button onclick="showCreateModal()" class="px-3 lg:px-6 py-2 lg:py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition shadow-md hover:shadow-lg text-sm lg:text-base whitespace-nowrap">
+                            <i class="fas fa-plus mr-1 lg:mr-2"></i>
+                            <span class="hidden sm:inline">새 FAQ 등록</span>
+                            <span class="sm:hidden">추가</span>
                         </button>
                     </div>
                 </div>
             </header>
 
             <!-- 필터 -->
-            <div class="p-8 pb-4">
+            <div class="p-4 lg:p-8 lg:pb-4">
                 <div class="bg-white rounded-lg shadow-sm p-4 flex items-center space-x-4">
                     <label class="text-sm font-semibold text-gray-700">카테고리:</label>
                     <select id="categoryFilter" onchange="loadFAQs()" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
@@ -190,6 +207,26 @@
             service: '서비스',
             technical: '기술지원'
         };
+
+        // 모바일 사이드바 토글
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+        const openBtn = document.getElementById('openSidebar');
+        const closeBtn = document.getElementById('closeSidebar');
+
+        function openSidebar() {
+            sidebar.classList.remove('-translate-x-full');
+            overlay.classList.remove('hidden');
+        }
+
+        function closeSidebar() {
+            sidebar.classList.add('-translate-x-full');
+            overlay.classList.add('hidden');
+        }
+
+        openBtn.addEventListener('click', openSidebar);
+        closeBtn.addEventListener('click', closeSidebar);
+        overlay.addEventListener('click', closeSidebar);
 
         // 페이지 로드 시
         document.addEventListener('DOMContentLoaded', () => {
