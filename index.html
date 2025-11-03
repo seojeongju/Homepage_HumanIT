@@ -258,24 +258,73 @@ transform: scale(1.05);
 </a>
 
 <!-- 2. 사업영역 카드 -->
-<a href="/business" class="block bg-blue-500 rounded-lg shadow-md overflow-hidden hover:shadow-xl transition relative group">
-<div class="absolute inset-0 bg-gradient-to-br from-blue-400 to-blue-600 opacity-90 group-hover:opacity-100 transition"></div>
-<div class="absolute inset-0 bg-cover bg-center opacity-20" style="background-image: url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&h=400&fit=crop');"></div>
-<div class="relative p-8 text-center text-white h-full flex flex-col justify-center">
-<h3 class="text-3xl font-bold mb-4">사업영역</h3>
-<p class="text-sm mb-3 font-semibold text-blue-100">5대 핵심 과제</p>
-<div class="space-y-1">
-<p class="text-base">교육용 키오스크</p>
-<p class="text-base">배리어프리 키오스크</p>
-<p class="text-base">우리두리 돌봄인형</p>
-<p class="text-base">청각장애인 AI 스마트허브</p>
-<p class="text-base">컨설팅</p>
+<div class="block bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg shadow-md overflow-hidden hover:shadow-xl transition relative">
+<div class="p-6">
+<div class="text-center text-white mb-6">
+<h3 class="text-3xl font-bold mb-2">사업영역</h3>
+<p class="text-sm font-semibold text-blue-100">5대 핵심 과제</p>
 </div>
-<div class="mt-4">
-<span class="inline-block text-sm font-semibold bg-white text-blue-600 px-4 py-2 rounded-full group-hover:bg-blue-100 transition">자세히 보기 →</span>
+
+<!-- 2x2 + 1 그리드 레이아웃 -->
+<div class="grid grid-cols-2 gap-3 mb-3">
+<!-- 1. 교육용 키오스크 -->
+<div class="bg-white/95 backdrop-blur-sm rounded-lg p-4 hover:bg-white hover:scale-105 transition-all duration-300 shadow-md">
+<div class="flex flex-col items-center text-center space-y-2">
+<div class="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-500 rounded-xl flex items-center justify-center">
+<i class="fas fa-graduation-cap text-white text-xl"></i>
+</div>
+<p class="text-sm font-bold text-gray-800">교육용<br>키오스크</p>
 </div>
 </div>
+
+<!-- 2. 배리어프리 키오스크 -->
+<div class="bg-white/95 backdrop-blur-sm rounded-lg p-4 hover:bg-white hover:scale-105 transition-all duration-300 shadow-md">
+<div class="flex flex-col items-center text-center space-y-2">
+<div class="w-12 h-12 bg-gradient-to-br from-purple-400 to-purple-500 rounded-xl flex items-center justify-center">
+<i class="fas fa-universal-access text-white text-xl"></i>
+</div>
+<p class="text-sm font-bold text-gray-800">배리어프리<br>키오스크</p>
+</div>
+</div>
+
+<!-- 3. 우리두리 돌봄인형 -->
+<div class="bg-white/95 backdrop-blur-sm rounded-lg p-4 hover:bg-white hover:scale-105 transition-all duration-300 shadow-md">
+<div class="flex flex-col items-center text-center space-y-2">
+<div class="w-12 h-12 bg-gradient-to-br from-pink-400 to-pink-500 rounded-xl flex items-center justify-center">
+<i class="fas fa-heart text-white text-xl"></i>
+</div>
+<p class="text-sm font-bold text-gray-800">우리두리<br>돌봄인형</p>
+</div>
+</div>
+
+<!-- 4. 청각장애인 AI 스마트허브 -->
+<div class="bg-white/95 backdrop-blur-sm rounded-lg p-4 hover:bg-white hover:scale-105 transition-all duration-300 shadow-md">
+<div class="flex flex-col items-center text-center space-y-2">
+<div class="w-12 h-12 bg-gradient-to-br from-green-400 to-green-500 rounded-xl flex items-center justify-center">
+<i class="fas fa-assistive-listening-systems text-white text-xl"></i>
+</div>
+<p class="text-sm font-bold text-gray-800">청각장애인<br>AI 스마트허브</p>
+</div>
+</div>
+</div>
+
+<!-- 5. 컨설팅 (하단 중앙) -->
+<div class="grid grid-cols-1">
+<div class="bg-white/95 backdrop-blur-sm rounded-lg p-4 hover:bg-white hover:scale-105 transition-all duration-300 shadow-md">
+<div class="flex flex-col items-center text-center space-y-2">
+<div class="w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-500 rounded-xl flex items-center justify-center">
+<i class="fas fa-handshake text-white text-xl"></i>
+</div>
+<p class="text-sm font-bold text-gray-800">컨설팅</p>
+</div>
+</div>
+</div>
+
+<a href="/business" class="block mt-4">
+<span class="inline-block w-full text-center text-sm font-semibold bg-white text-blue-600 px-4 py-2 rounded-full hover:bg-blue-50 transition">자세히 보기 →</span>
 </a>
+</div>
+</div>
 
 <!-- 3. 고객상담/회사정보 카드 -->
 <div class="bg-gradient-to-br from-red-50 to-pink-50 rounded-lg shadow-md p-8 border-2 border-red-200 hover:shadow-xl transition">
